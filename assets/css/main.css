@@ -2526,7 +2526,7 @@ input, select, textarea {
 
 	#banner {
 		background-color: #000; /* fallback */
-		background-image: url("../../images/rad_shirt_cropped.png");
+		background-image: url("/images/rad_shirt_cropped.png");
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: contain; /* or use 'cover' if you want it to fully fill the banner */
