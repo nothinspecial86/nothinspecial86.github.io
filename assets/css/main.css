@@ -1772,6 +1772,17 @@ input, select, textarea {
 				opacity: 0.35;
 			}
 
+/* Adds space below "What’s Happening at Rad Audio" heading */
+.wrapper.style1.container.special .major {
+	padding-top: 1em;
+	margin-bottom: 2em; /* Adjust as needed */
+}
+
+/* Adds space above the Gigs and Bands columns */
+.gigs-bands-section {
+  margin-top: 2em; /* Add space above the two-column layout */
+}
+
 	footer > :last-child {
 		margin-bottom: 0;
 	}
