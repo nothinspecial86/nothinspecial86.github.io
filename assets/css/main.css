@@ -2574,9 +2574,12 @@ input, select, textarea {
 
 			#banner .inner p {
 				letter-spacing: 0.1em;
-				margin: 0;
-				text-transform: uppercase;
-			}
+				margin: 0 auto;
+				max-width: 600px;       /* Allow it to expand reasonably */
+				line-height: 1.5em;
+				text-transform: none;   /* Or keep uppercase if preferred */
+				word-break: normal;     /* Prevent awkward line breaks */
+				}
 
 				#banner .inner p a {
 					color: inherit;
