@@ -2525,23 +2525,28 @@ input, select, textarea {
 	}
 
 	#banner {
-		background-color: #000; /* fallback */
+		background-color: #000;
 		background-image: url("/images/rad_shirt_cropped.png");
 		background-repeat: no-repeat;
 		background-position: center center;
-		background-size: contain; /* or use 'cover' if you want it to fully fill the banner */
-		
+		background-size: contain; /* Show full image */
+		background-attachment: scroll;
+
 		color: #fff;
 		cursor: default;
 		text-align: center;
+
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+
 		padding: 4em 2em;
-		min-height: 100vh; /* full screen height */
+		min-height: 100vh;
 		box-sizing: border-box;
+		overflow: hidden; /* prevents scrollbars if image is too large */
 	}
+
 
 
 	#banner .inner {
