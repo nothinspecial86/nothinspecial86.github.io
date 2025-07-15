@@ -2526,7 +2526,7 @@ input, select, textarea {
 
 	#banner {
 		background-attachment: scroll, scroll, scroll, fixed;
-		background-color: #2d1722; /* Replace with the closest color from your image */
+		background-color: #2d1722;
 		background-image: url("images/light-bl.svg"), url("images/light-br.svg"), url("images/overlay.png"), url("../../images/rad_shirt_cropped.png");
 		background-position: bottom left, bottom right, top left, center top;
 		background-repeat: no-repeat, no-repeat, repeat, no-repeat;
@@ -2534,20 +2534,22 @@ input, select, textarea {
 
 		color: #fff;
 		cursor: default;
-		min-height: 100vh;
-		padding: 4em 2em; /* Adjusted padding */
+		padding: 4em 2em 6em 2em; /* Added more bottom padding */
 		text-align: center;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		box-sizing: border-box;
-		padding-bottom: 50px;
+
+		/* Remove fixed height */
+		/* min-height: 100vh; */ /* Comment or remove this */
+		height: auto;
 	}
 
 	#banner .inner {
 		animation: reveal-banner 1s 0.25s ease-in-out forwards;
-		max-width: 200px;
+		max-width: 400px;
 		width: 100%;
 		margin: 0 auto;
 		padding: 3em 2em;
