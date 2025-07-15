@@ -2620,6 +2620,15 @@ input, select, textarea {
 	body.index #main {
 		padding-top: 0em;
 	}
+	header.special:before,
+	header.special:after {
+		content: none !important;
+		display: none !important;
+	}
+	.wrapper.style2.container.special-alt {
+		margin-top: 3em; /* Increase or decrease as needed */
+	}
+
 
 /* CTA */
 
@@ -3417,4 +3426,33 @@ input, select, textarea {
 	#banner .inner {
 		display: none !important;
 	}
+}
+
+header.special.container {
+    display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  header.special.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em 0.5em;
+    margin: 0 auto;
+    max-width: 90%;
+    text-align: center;
+  }
+
+  header.special.container img {
+    max-width: 60%;
+    height: auto;
+    margin: 0.5em 0 1em 0;
+  }
+
+  header.special.container h2 {
+    font-size: 1.5em;
+    line-height: 1.3em;
+    margin: 0;
+  }
 }
