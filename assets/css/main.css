@@ -2548,35 +2548,29 @@ input, select, textarea {
 }
 
 /* Centered overlay content */
-#banner .inner {
-	animation: reveal-banner 1s 0.25s ease-in-out forwards;
-	max-width: 800px;
-	width: 100%;
-	padding: 3em 2em;
-	background: rgba(52, 27, 43, 0.6); /* Optional overlay box */
-	color: #fff;
-	text-align: center;
-	box-sizing: border-box;
-	opacity: 0;
-	position: relative;
-	z-index: 2;
-}
-
 @media screen and (max-width: 768px) {
   #banner {
-    height: 480px;
-    width: 100%; /* Ensure it spans full width */
+    height: auto;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   #hero-image {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 30%; /* adjust this to crop more top */
+    height: auto;
+    max-height: 300px; /* Adjust to fit image size nicely */
+    object-fit: contain;
+    object-position: center;
   }
 
   #banner .inner {
-    padding: 2em 1em;
+    padding: 1.5em 1em;
+    position: absolute;
+    z-index: 2;
+    background: rgba(52, 27, 43, 0.6);
   }
 }
 
