@@ -2525,24 +2525,22 @@ input, select, textarea {
 	}
 
 	#banner {
-		background-attachment: scroll, scroll, scroll, fixed;
-		background-color: #000;
-		background-image: url("images/light-bl.svg"), url("images/light-br.svg"), url("../../images/rad_shirt_cropped.png");
-		background-position: bottom left, bottom right, top left, center top;
-		background-repeat: no-repeat, no-repeat, repeat, no-repeat;
-		background-size: 25em, 25em, auto, cover; /* Cover ensures image fills area without cutting off weirdly */
-
+		background-color: #000; /* fallback */
+		background-image: url("../../images/rad_shirt_cropped.png");
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: contain; /* or use 'cover' if you want it to fully fill the banner */
+		
 		color: #fff;
 		cursor: default;
-		padding: 4em 2em 6em 2em;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		padding: 4em 2em;
+		min-height: 100vh; /* full screen height */
 		box-sizing: border-box;
-
-		min-height: 100vh; /* Ensures banner fills screen height */
 	}
 
 
