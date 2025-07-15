@@ -2558,19 +2558,39 @@ input, select, textarea {
 
 @media screen and (max-width: 768px) {
   #banner {
-    height: 480px;
-	width: auto;
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 250px; /* Ensure some space for image */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-#hero-image {
-  object-fit: cover;
-  object-position: center 250%; /* Adjust % to simulate cropping more of top */
-}
+  #hero-image {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;  /* Prevent cutoffs */
+    object-position: center;
+    position: relative;
+    z-index: 1;
+    display: block;
+  }
 
   #banner .inner {
-    padding: 2em 1em;
+    position: absolute;
+    z-index: 2;
+    padding: 1.5em 1em;
+    background: rgba(52, 27, 43, 0.6);
+    text-align: center;
+    width: 100%;
+    max-width: 90%;
+    box-sizing: border-box;
   }
 }
+
 
 /* Headline */
 #banner .inner header h2 {
