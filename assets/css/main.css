@@ -3353,3 +3353,50 @@ input, select, textarea {
 #logo a {
   color: #000000 !important;
 }
+
+#nav > ul {
+  display: flex;
+  gap: 2em;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#nav li {
+  position: relative;
+}
+
+#nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+  #nav > ul {
+    flex-direction: column;
+    background-color: #111;
+    display: none;
+    width: 100%;
+    text-align: right;
+    padding: 1em;
+  }
+
+  #nav.active > ul {
+    display: flex;
+  }
+
+  /* Optional toggle icon */
+  #nav-toggle {
+    display: block;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.5em;
+    position: absolute;
+    right: 1em;
+    top: 1em;
+  }
+}
