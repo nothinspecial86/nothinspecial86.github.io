@@ -3386,7 +3386,7 @@ input, select, textarea {
 }
 
 #logo a {
-  font-size: 8rem; /* Try 2.5rem or more if needed */
+  font-size: 4rem;
   font-weight: 800;
   letter-spacing: 0.05em;
 }
