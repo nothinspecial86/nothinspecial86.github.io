@@ -2544,8 +2544,6 @@ input, select, textarea {
 		box-sizing: border-box;
 	}
 
-
-
 		#banner .inner {
 			-moz-animation: reveal-banner 1s 0.25s ease-in-out;
 			-webkit-animation: reveal-banner 1s 0.25s ease-in-out;
@@ -2563,13 +2561,16 @@ input, select, textarea {
 			text-align: center;
 		}
 
-			#banner .inner header {
-				display: inline-block;
-				border-bottom: solid 2px;
-				border-top: solid 2px;
-				margin: 0 0 2em 0;
-				padding: 3px 0 3px 0;
-			}
+			#banner .inner {
+				max-width: 800px;      /* Limits the width */
+				width: 100%;           /* Responsive */
+				margin: 0 auto;        /* Center horizontally */
+				padding: 3em 2em;      /* Adds inner spacing */
+				background: rgba(52, 27, 43, 0.5); /* Optional: dark translucent background */
+				color: #fff;
+				text-align: center;
+				box-sizing: border-box;
+				}
 
 				#banner .inner header h2 {
 					border-bottom: solid 2px;
