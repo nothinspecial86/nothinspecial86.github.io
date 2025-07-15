@@ -2526,7 +2526,7 @@ input, select, textarea {
 
 	#banner {
 		background-attachment: scroll, scroll, scroll, fixed;
-		background-color: #2d1722;
+		background-color: #000;
 		background-image: url("images/light-bl.svg"), url("images/light-br.svg"), url("images/overlay.png"), url("../../images/rad_shirt_cropped.png");
 		background-position: bottom left, bottom right, top left, center top;
 		background-repeat: no-repeat, no-repeat, repeat, no-repeat;
