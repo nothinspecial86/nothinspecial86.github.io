@@ -2548,16 +2548,16 @@ input, select, textarea {
 	}
 
 	#banner .inner {
-		animation: reveal-banner 1s 0.25s ease-in-out forwards;
-		max-width: 800px;
-		width: auto;
-		margin: 0 auto;
-		padding: 1.5em 1em;
-		background: rgba(52, 27, 43, 0.5);
-		color: #fff;
-		text-align: center;
-		box-sizing: border-box;
-		opacity: 0;
+	animation: reveal-banner 1s 0.25s ease-in-out forwards;
+	max-width: 800px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 3em 2em;
+	background: rgba(52, 27, 43, 0.5);
+	color: #fff;
+	text-align: center;
+	box-sizing: border-box;
+	opacity: 0;
 	}
 
 				#banner .inner header h2 {
