@@ -2524,25 +2524,24 @@ input, select, textarea {
 		}
 	}
 
-	#banner {
-		background-color: #000;
-		background-image: url("/images/rad_shirt_cropped.png");
-		background-repeat: no-repeat;
-		background-position: center center;
-		background-size: contain; /* Makes the full image visible */
-		
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
+#banner {
+	background-color: #000;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	position: relative;
+}
 
-		width: 100%;
-		min-height: 100vh; /* Always fill the screen height */
-		box-sizing: border-box;
-		padding: 4em 2em;
-	}
-
-
+#hero-image {
+	max-width: 100%;
+	max-height: 100%;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+}
 
 
 	#banner .inner {
