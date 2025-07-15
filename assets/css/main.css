@@ -2530,11 +2530,11 @@ input, select, textarea {
 		background-image: url("images/light-bl.svg"), url("images/light-br.svg"), url("../../images/rad_shirt_cropped.png");
 		background-position: bottom left, bottom right, top left, center top;
 		background-repeat: no-repeat, no-repeat, repeat, no-repeat;
-		background-size: 25em, 25em, auto, contain;
+		background-size: 25em, 25em, auto, cover; /* Cover ensures image fills area without cutting off weirdly */
 
 		color: #fff;
 		cursor: default;
-		padding: 4em 2em 6em 2em; /* Added more bottom padding */
+		padding: 4em 2em 6em 2em;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
@@ -2542,10 +2542,9 @@ input, select, textarea {
 		align-items: center;
 		box-sizing: border-box;
 
-		/* Remove fixed height */
-		/* min-height: 100vh; */ /* Comment or remove this */
-		height: auto;
+		min-height: 100vh; /* Ensures banner fills screen height */
 	}
+
 
 	#banner .inner {
 	animation: reveal-banner 1s 0.25s ease-in-out forwards;
