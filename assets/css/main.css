@@ -2542,6 +2542,7 @@ input, select, textarea {
 		justify-content: center;
 		align-items: center;
 		box-sizing: border-box;
+		padding-bottom: 50px;
 	}
 
 		#banner .inner {
