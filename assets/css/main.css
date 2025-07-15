@@ -2525,22 +2525,23 @@ input, select, textarea {
 	}
 
 	#banner {
-	background-attachment: scroll, scroll, scroll, fixed;
-	background-color: #645862;
-	background-image: url("images/light-bl.svg"), url("images/light-br.svg"), url("images/overlay.png"), url("../../images/rad_shirt_cropped.png");
-	background-position: bottom left, bottom right, top left, center center;
-	background-repeat: no-repeat, no-repeat, repeat, no-repeat;
-	background-size: 25em, 25em, auto, cover;
+		background-attachment: scroll, scroll, scroll, fixed;
+		background-color: #645862;
+		background-image: url("images/light-bl.svg"), url("images/light-br.svg"), url("images/overlay.png"), url("../../images/rad_shirt_cropped.png");
+		background-position: bottom left, bottom right, top left, center center;
+		background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+		background-size: 25em, 25em, auto, contain;
 
-	color: #fff;
-	cursor: default;
-	min-height: 100vh;
-	padding: 0 2em;
-	text-align: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+		color: #fff;
+		cursor: default;
+		min-height: 100vh;
+		padding: 0 2em;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
+
 
 		#banner .inner {
 			-moz-animation: reveal-banner 1s 0.25s ease-in-out;
