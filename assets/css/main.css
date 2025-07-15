@@ -2565,6 +2565,7 @@ input, select, textarea {
 @media screen and (max-width: 768px) {
   #banner {
     height: 480px;
+	width: auto;
   }
 
 #hero-image {
