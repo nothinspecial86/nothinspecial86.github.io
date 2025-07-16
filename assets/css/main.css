@@ -68,6 +68,13 @@ input, select, textarea {
 	appearance: none;
 }
 
+@font-face {
+  font-family: 'OpenYourEyes';
+  src: url('/assets/webfonts/Open your eyes.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Basic */
 
 	html {
@@ -3478,9 +3485,9 @@ input, select, textarea {
 }
 
 #logo a {
-  font-size: 2.5rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
+	font-size: 2.5rem;	
+	font-weight: 800;
+	letter-spacing: 0.05em;
 }
 
 @media screen and (max-width: 736px) {
@@ -3506,11 +3513,6 @@ input, select, textarea {
 	}
 }
 
-header.special.container {
-    display: none;
-}
-
-@media screen and (max-width: 1000px) {
   header.special.container {
     display: flex;
     flex-direction: column;
