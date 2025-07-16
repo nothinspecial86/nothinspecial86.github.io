@@ -1726,7 +1726,7 @@ input, select, textarea {
 	}
 
 	header.major {
-		padding-bottom: 2em;
+		padding-bottom: 0em;
 	}
 
 	header.special {
@@ -1795,7 +1795,7 @@ input, select, textarea {
 	}
 
 	footer.major {
-		padding-top: 3em;
+		padding-top: 0em;
 	}
 
 /* Form */
@@ -2676,28 +2676,59 @@ input, select, textarea {
 
 /* CTA */
 
-	#cta {
-		background-attachment: scroll, scroll, scroll, fixed;
-		background-color: #645862;
-		background-image: url("images/light-tl.svg"), url("images/light-tr.svg"), url("images/overlay.png"), url("/images/rad_logo.png");
-		background-position: top left, top right, top left, bottom center;
-		background-repeat: no-repeat, no-repeat, repeat, no-repeat;
-		background-size: 25em, 25em, auto, cover;
-		color: #fff;
-		padding: 5em;
-		text-align: center;
-	}
+#cta {
+  background-color: #fef9f3;
+  padding: 5em 2em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+  margin: 4em auto;
+  max-width: 1000px;
+}
 
-		#cta header {
-			margin-bottom: 2em;
-		}
+.cta-content {
+  max-width: 600px;
+}
+
+#cta h2 {
+  font-size: 2.4em;
+  color: #1a1a1a;
+  margin-bottom: 0.6em;
+}
+
+#cta p {
+  font-size: 1.2em;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 2em;
+}
+
+#cta .button.primary {
+  background-color: #000000;
+  color: #000;
+  font-size: 1em;
+  padding: 0.75em 0em;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+#cta .button.primary:hover {
+  background-color: #000000;
+  color: #000000;
+}
 
 /* Footer */
 
 	#footer {
 		background: #E8EEF4;
 		color: #7c8081;
-		padding: 5em 5em 10em 5em;
+		padding: 1.5em 5em 2.5em 2.5em;
 		text-align: center;
 	}
 
@@ -3485,9 +3516,19 @@ input, select, textarea {
 }
 
 #logo a {
-	font-size: 2.5rem;	
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	font-size: 2.5rem;
 	font-weight: 800;
-	letter-spacing: 0.05em;
+	text-decoration: none;
+	color: inherit;
+}
+
+#logo .logo-icon {
+	height: 32px; /* Adjust as needed */
+	width: auto;
+	display: inline-block;
 }
 
 @media screen and (max-width: 736px) {
@@ -3532,31 +3573,34 @@ input, select, textarea {
   text-align: center;
   white-space: normal;
   }
-}
+
 
 .gigs-bands-section {
   display: flex;
-  gap: 2em;
-  padding: 3em 2em;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  gap: 3em;
+  padding: 4em 3em;
+  background-color: #f5f7fa;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .gigs-column, .bands-column {
-  flex: 1 1 45%;
-  min-width: 280px;
+  flex: 1 1 40%;
+  min-width: 300px;
 }
 
 .gigs-bands-section h3 {
   text-align: center;
-  color: #e6b800; /* Yellow */
-  font-size: 1.4em;
-  margin-bottom: 1em;
-  letter-spacing: 1px;
+  color: #1c1c3e;
+  font-size: 1.8em;
+  margin-bottom: 1.2em;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
+  font-weight: 700;
 }
 
 .gig-list, .band-list {
@@ -3566,34 +3610,40 @@ input, select, textarea {
 }
 
 .gig-list li, .band-list li {
-  background: #fffbea;
-  border-left: 4px solid #e6b800;
-  padding: 1em 1.5em;
-  margin-bottom: 1em;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-  transition: transform 0.2s ease;
+  background: #464646; /* Dark card base */
+  border-left: 6px solid #0ea5e9;
+  padding: 1.2em 1.6em;
+  margin-bottom: 1.2em;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  transition: all 0.25s ease-in-out;
+  color: #f0f0f0;
 }
 
 .gig-list li:hover, .band-list li:hover {
-  transform: translateY(-3px);
-  background-color: #fff3c4;
+  transform: translateY(-4px) scale(1.01);
+  background-color: #565656; /* Light hover */
+  color: #ffffff;
 }
 
 .gig-list strong {
   display: block;
-  margin-bottom: 0.25em;
-  color: #333;
+  margin-bottom: 0.3em;
+  color: #0ea5e9;
+  font-weight: 700;
 }
 
 .gig-list a, .band-list a {
-  color: #d4aa00;
+  color: #ffffff; /* Gold */
   text-decoration: none;
   font-weight: 600;
 }
 
-.location {
-  font-size: 0.9em;
-  color: #666;
+.gig-list a:hover, .band-list a:hover {
+  text-decoration: underline;
 }
 
+.location {
+  font-size: 0.9em;
+  color: #aaa;
+}
