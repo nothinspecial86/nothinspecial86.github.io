@@ -3639,3 +3639,44 @@ input, select, textarea {
   font-size: 0.9em;
   color: #aaa;
 }
+
+/* Contact Page Image Header */
+.contact-header {
+  text-align: center;
+  margin-top: 5em;
+  margin-bottom: 3em;
+}
+
+.contact-header-image {
+  max-width: 100%;
+  height: auto;
+  width: 500px; /* Adjust as needed */
+  display: inline-block;
+}
+
+/* Subtitle under image */
+.contact-subtitle {
+  font-size: 1.1em;
+  color: #555;
+  margin-top: 1.5em;
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 840px) {
+  .contact-header {
+    margin-top: 2em;
+  }
+
+  .contact-header-image {
+    width: 90%;
+  }
+
+  .contact-subtitle {
+    font-size: 1em;
+    margin-top: 1em;
+  }
+}
+
+
+
+
