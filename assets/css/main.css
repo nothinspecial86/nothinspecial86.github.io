@@ -3644,21 +3644,24 @@ input, select, textarea {
 .contact-header {
   text-align: center;
   margin-top: 5em;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
 }
 
 .contact-header-image {
   max-width: 100%;
   height: auto;
-  width: 500px; /* Adjust as needed */
+  width: 500px;
   display: inline-block;
+  margin-top: 1em; /* Merged in from below */
 }
 
 /* Subtitle under image */
 .contact-subtitle {
   font-size: 1.1em;
-  color: #555;
-  margin-top: 1.5em;
+  color: #222;
+  line-height: 1.6;
+  margin-top: 1em;
+  margin-bottom: -2em; /* Reduced spacing below */
 }
 
 /* Mobile adjustments */
@@ -3669,14 +3672,68 @@ input, select, textarea {
 
   .contact-header-image {
     width: 90%;
+    margin-top: -1em;
   }
 
   .contact-subtitle {
     font-size: 1em;
     margin-top: 1em;
+    margin-bottom: 0.5em; /* Keep consistent on mobile */
   }
 }
 
+body.contact-page {
+  background-image: url('/images/background_test2.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
 
+/* Optional: Add overlay for readability */
+body.contact-page::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
 
+.contact-header-box {
+  background-color: white;
+  padding: 2em 2em;
+  border-radius: 8px;
+  max-width: 1500px;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.contact-box {
+  background-color: white;
+  width: 55%;
+  margin: 1em auto;
+  padding: 0;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+/* Mobile tweaks */
+@media screen and (max-width: 840px) {
+  .contact-box {
+    background-color: white;
+    width: 80%;
+    margin: 0em auto 0 auto;
+    padding: 1.1px 10px;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+    position: relative;
+    top: unset;
+    left: unset;
+    transform: none;
+  }
+}
 
