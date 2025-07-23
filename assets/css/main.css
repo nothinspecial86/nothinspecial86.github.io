@@ -3868,7 +3868,7 @@ input, select, textarea {
 }
 
 body.contact-page {
-  background-image: url('/images/background_test6.png');
+  background-image: url('images/background_test6.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
