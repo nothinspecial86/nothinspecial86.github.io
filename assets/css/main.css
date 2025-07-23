@@ -3868,7 +3868,7 @@ input, select, textarea {
 }
 
 body.contact-page {
-  background-image: url('images/background_test6.png');
+  background-image: url('/images/background_test6.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -3910,17 +3910,14 @@ body.contact-page::before {
 /* Mobile tweaks */
 @media screen and (max-width: 840px) {
   .contact-box {
-    background-color: white;
-    width: 80%;
-    margin: 0em auto 0 auto;
-    padding: 1.1px 10px;
-    border-radius: 12px;
+    width: 100%;
+    padding: 2em;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
     position: relative;
-    top: unset;
-    left: unset;
-    transform: none;
+    z-index: 2;
+    border-radius: 12px;
   }
+
   .contact-header p {
 	margin-left: 0em;
 	margin-right: 0em;
