@@ -3869,6 +3869,7 @@ input, select, textarea {
 
 body.contact-page {
   background-image: url('/images/background_test6.png');
+  background-color: #cecece;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -3899,7 +3900,7 @@ body.contact-page::before {
 
 .contact-box {
   background-color: white;
-  width: 55%;
+  width: 80%;
   margin: 1em auto;
   padding: 0;
   border-radius: 12px;
