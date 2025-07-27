@@ -3579,7 +3579,7 @@ input, select, textarea {
 }
 
 .header-image img {
-  width: 400px;
+  width: 500px;
   height: auto;
   border-radius: 8px;
   object-fit: cover;
@@ -3631,6 +3631,13 @@ input, select, textarea {
 
 .bands-section {
 	background-image: url('/images/background_test5.png');
+}
+
+.bands-section hr {
+	border: none;
+	border-top: 1px solid #999;
+	margin-top: 1em;
+	width: 85%
 }
 
 .gigs-section h3, .bands-section h3 {
@@ -3714,12 +3721,12 @@ input, select, textarea {
 .band-info h4 {
   margin: 0 0 0.3em 0;
   font-size: 1.1em;
-  color: #fff;
+  color:  #f2c300;
 }
 
 .band-info p {
   font-size: 0.95em;
-  color: #ccc;
+  
 }
 
 @media screen and (max-width: 768px) {
@@ -3761,7 +3768,6 @@ input, select, textarea {
 	background-image: url('/images/background_test5.png');
 }
 }
-
 
 /* Bands Page */
 .bands-section {
@@ -4181,17 +4187,18 @@ body.upcoming-events-page .gig-list-stacked hr {
 }
 
 body.upcoming-events-page {
-	background-color: rgb(228, 228, 228);
+	background-color: #f9fbfc;
 }
 
 body.upcoming-events-page .gigs-section {
   margin-top: 4em;
-  width: 100%;
+  width: 80%;
 }
 
 @media screen and (max-width: 840px) {
  body.upcoming-events-page .gigs-section {
   margin-top: 0em;
-}
+  width: 100%;
+  }
 }
 
