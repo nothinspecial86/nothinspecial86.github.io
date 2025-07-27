@@ -3974,21 +3974,24 @@ body.contact-page::before {
 }
 
 /* About Page */
+body.about-page {
+  background-image: url('/images/background_test6.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.about-page .wrapper.style1,
+body.about-page .about-main {
+  background: transparent;
+  box-shadow: none;
+}
+
 .about-main {
 	margin-top: 5em;
 }
 .about-main p {
 	text-align: left;
-}
-
-.about-section {
-  background: rgba(0, 0, 0, 0.7); /* Optional: semi-transparent overlay if used over a background */
-  padding: 4em 3em;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  color: #fff;
-  max-width: 1400px;
-  margin: 0 auto;
 }
 
 .about-section h2 {
@@ -4000,15 +4003,14 @@ body.contact-page::before {
 .about-section .tagline {
   font-size: 1.2em;
   font-weight: 300;
-  color: #ccc;
-  margin-bottom: 2em;
+  color: #f2c300;
+  text-align: center;
 }
 
 .about-content p {
   font-size: 1.05em;
-  line-height: 1.75em;
+  line-height: 1.5em;
   color: #eaeaea;
-  margin-bottom: 1.5em;
 }
 
 
@@ -4020,12 +4022,10 @@ body.contact-page::before {
 }
 
 .testimonials-wrapper {
-  background-image: url('/images/background_test6.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 12px;
-  padding: 4em 2em;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
   color: #fff;
   width: 100%;
@@ -4042,19 +4042,27 @@ body.contact-page::before {
   padding: 3em 1em;
 }
 
-.testimonials-section h2,
-.testimonials-section p {
+.testimonials-section h2 {
   text-align: center;
-  color: #fff;
+  color: #f2c300;
+  font-size: 2.5em;
 }
 
 .testimonials blockquote {
   background: rgba(255, 255, 255, 0.05);
-  padding: 1.5em;
+  padding: 1em;
   border-left: 4px solid #f2c300;
   font-style: italic;
   border-radius: 8px;
-  margin-bottom: 2em;
+  
+  /* Background image */
+  background-image: url('/images/background_test6.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Glowing */
+  box-shadow: 0 0 10px #000000, 0 0 20px #f2c300;
 }
 
 .testimonial-name {
@@ -4070,7 +4078,23 @@ body.contact-page::before {
     margin-top: 0;
     padding: 0;
   }
-
+  .about-section h2 {
+	font-size: 1.7em;
+  }
+  .about-section p {
+	font-size: 1em;
+  }
+  .testimonials blockquote {
+	box-shadow: 0 0 0px #000000, 0 0 10px #f2c300;
+  }
+  body.about-page {
+  background-image: 
+    linear-gradient(rgba(201, 201, 201, 0.08), rgba(0, 0, 0, 0)), 
+    url('/images/background_test5.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
   .testimonials-wrapper {
     width: 100vw; /* Full viewport width */
     max-width: 100vw;
