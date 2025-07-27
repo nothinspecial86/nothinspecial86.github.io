@@ -4129,3 +4129,69 @@ body.about-page .about-main {
 body.about-page #cta {
   margin-bottom: 3em; /* Adjust the value as needed */
 }
+
+/*Upcoming Events Page*/
+body.upcoming-events-page .gigs-section h3 {
+  text-align: center;
+  color: #ffffff;
+  font-size: 2em;
+  font-weight: 700;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 1em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+body.upcoming-events-page .gig-list-stacked {
+  list-style: none;
+  padding: 0;
+  margin: 2em auto;
+  max-width: 1000px;
+}
+
+body.upcoming-events-page .gig-list-stacked li {
+  margin-bottom: 2.5em;
+}
+
+body.upcoming-events-page .gig-date {
+  font-weight: bold;
+  color: #f2c300;
+  font-size: 0.95em;
+  text-transform: uppercase;
+  margin-bottom: 0.4em;
+}
+
+body.upcoming-events-page .gig-title {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #ffffff;
+  margin: 0.2em 0;
+}
+
+body.upcoming-events-page .gig-location {
+  font-size: 0.95em;
+  color: #ccc;
+}
+
+body.upcoming-events-page .gig-list-stacked hr {
+  border: none;
+  border-top: 1px solid #999;
+  margin-top: 1em;
+}
+
+body.upcoming-events-page {
+	background-color: rgb(228, 228, 228);
+}
+
+body.upcoming-events-page .gigs-section {
+  margin-top: 4em;
+  width: 100%;
+}
+
+@media screen and (max-width: 840px) {
+ body.upcoming-events-page .gigs-section {
+  margin-top: 0em;
+}
+}
+
