@@ -3633,13 +3633,6 @@ input, select, textarea {
 	background-image: url('/images/background_test5.png');
 }
 
-.bands-section hr {
-	border: none;
-	border-top: 1px solid #999;
-	margin-top: 1em;
-	width: 85%
-}
-
 .gigs-section h3, .bands-section h3 {
   text-align: center;
   color: #ffffff;
@@ -3727,6 +3720,15 @@ input, select, textarea {
 .band-info p {
   font-size: 0.95em;
   
+}
+
+body.index-page .band-divider hr {
+  border: none;
+  height: 2px;
+  background: #f2c300;
+  box-shadow: 0 0 8px #f2c300;
+  margin: 2em auto;
+  width: 85%;
 }
 
 @media screen and (max-width: 768px) {
