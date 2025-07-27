@@ -3630,7 +3630,7 @@ input, select, textarea {
 }
 
 .bands-section {
-	background-image: url('/images/background_test4.png');
+	background-image: url('/images/background_test5.png');
 }
 
 .gigs-section h3, .bands-section h3 {
@@ -3756,6 +3756,9 @@ input, select, textarea {
 	margin-left: auto;
 	margin-right: auto;
 	background-size: 100% 100%;
+}
+.bands-section {
+	background-image: url('/images/background_test5.png');
 }
 }
 
