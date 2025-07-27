@@ -3972,3 +3972,122 @@ body.contact-page::before {
 	margin-left: 1em;
 	margin-right: 1em;
 }
+
+/* About Page */
+.about-main {
+	margin-top: 5em;
+}
+.about-main p {
+	text-align: left;
+}
+
+.about-section {
+  background: rgba(0, 0, 0, 0.7); /* Optional: semi-transparent overlay if used over a background */
+  padding: 4em 3em;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.about-section h2 {
+  font-size: 2.5em;
+  color: #f2c300;
+  margin-bottom: 0.2em;
+}
+
+.about-section .tagline {
+  font-size: 1.2em;
+  font-weight: 300;
+  color: #ccc;
+  margin-bottom: 2em;
+}
+
+.about-content p {
+  font-size: 1.05em;
+  line-height: 1.75em;
+  color: #eaeaea;
+  margin-bottom: 1.5em;
+}
+
+
+.testimonials-section {
+  background: none;
+  padding: 3em 1em;
+  display: flex;
+  justify-content: center;
+}
+
+.testimonials-wrapper {
+  background-image: url('/images/background_test6.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  padding: 4em 2em;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  width: 100%;
+  max-width: 1400px; /* restrict to centered frame */
+  margin: 0 auto;
+}
+
+.testimonials-special {
+  background: transparent; /* prevent light blue background */
+}
+
+.testimonials-section {
+  background: none; /* remove outer full-width background */
+  padding: 3em 1em;
+}
+
+.testimonials-section h2,
+.testimonials-section p {
+  text-align: center;
+  color: #fff;
+}
+
+.testimonials blockquote {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5em;
+  border-left: 4px solid #f2c300;
+  font-style: italic;
+  border-radius: 8px;
+  margin-bottom: 2em;
+}
+
+.testimonial-name {
+  display: block;
+  margin-top: 1em;
+  font-weight: bold;
+  color: #f2c300;
+}
+
+/* Mobile tweaks About Page*/
+@media screen and (max-width: 840px) {
+  .about-main {
+    margin-top: 0;
+    padding: 0;
+  }
+
+  .testimonials-wrapper {
+    width: 100vw; /* Full viewport width */
+    max-width: 100vw;
+    margin: 0;
+    padding: 2em 1em;
+    border-radius: 0; /* Optional: remove rounded corners on mobile */
+  }
+
+  .testimonials-special {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .testimonials-section {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
