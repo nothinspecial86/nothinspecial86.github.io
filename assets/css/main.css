@@ -3988,7 +3988,7 @@ body.about-page .about-main {
 }
 
 .about-main {
-	margin-top: 5em;
+	margin-top: 4.5em;
 }
 .about-main p {
 	text-align: left;
@@ -4011,8 +4011,16 @@ body.about-page .about-main {
   font-size: 1.05em;
   line-height: 1.5em;
   color: #eaeaea;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1em;
+  font-style: italic;
+  border-radius: 8px;
+  box-shadow: 0 0 0px #000000, 0 0 3px #f2c300;
 }
 
+.about-content {
+	margin-bottom: -4em;
+}
 
 .testimonials-section {
   background: none;
@@ -4082,8 +4090,11 @@ body.about-page .about-main {
 	font-size: 1.7em;
   }
   .about-section p {
-	font-size: 1em;
+	font-size: .8em;
   }
+  .about-content {
+	margin-bottom: .5em;
+}
   .testimonials blockquote {
 	box-shadow: 0 0 0px #000000, 0 0 10px #f2c300;
   }
