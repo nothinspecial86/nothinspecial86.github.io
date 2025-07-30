@@ -3826,13 +3826,23 @@ body.index-page .band-divider hr {
     margin-bottom: 2em;
   }
 
-  .bands-section {
-    margin-top: 1em; /* Nav bar padding on small screens */
-    margin-bottom: 1em;
-  }
+.bands-section {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.000001), rgba(0, 0, 0, 0.0000001)),  /* lighter overlay */
+    url(/images/background_test5.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+}
 
   .band-text {
     padding: 0.5em 0;
+  }
+  .band-text h3 {
+	color: #f2c300;
   }
 }
 
@@ -3997,6 +4007,7 @@ body.about-page .about-main {
 
 .about-main {
 	margin-top: 4.5em;
+	margin-bottom: 4em;
 }
 .about-main p {
 	text-align: left;
@@ -4021,14 +4032,15 @@ body.about-page .about-main {
   line-height: 1.5em;
   color: #eaeaea;
   background: rgba(255, 255, 255, 0.05);
-  padding: 1em;
   font-style: italic;
   border-radius: 8px;
   box-shadow: 0 0 0px #000000, 0 0 3px #f2c300;
+  line-height: 1.7;
+  padding: 1.5em;
 }
 
-.about-content {
-	margin-bottom: -4em;
+.testimonials blockquote {
+	margin: 2em, 1em;
 }
 
 .testimonials-section {
@@ -4059,9 +4071,14 @@ body.about-page .about-main {
   padding: 3em 1em;
 }
 
+.testimonials-section {
+  border-top: 2px solid rgba(242, 195, 0, 0.1);
+  box-shadow: 10px 10px 10px #000000, 10px 10px 20px #f2c300;
+}
+
 .testimonials-section h2 {
   text-align: center;
-  color: #f2c300;
+  color: rgb(242, 195, 0);
   font-size: 2.5em;
 }
 
