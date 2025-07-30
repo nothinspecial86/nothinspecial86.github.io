@@ -1,0 +1,40 @@
+1. Buy domain (choice is up to you on whatever you think looks best as this has no effect except for looks and what people type in)
+- radaudiopeoria.com - 11.28/yr
+- radaudiodunlap.com - 11.28/yr
+
+Other Examples:
+- radaudio.io - 34.98/yr
+- radaudio.org - 7.48/yr
+- radaudio.net - 12.98/yr
+
+.com generally more trusted/overall may be better suited
+
+2. LLC
+- Optional but highly recommended
+- Can get insurance for your small business to protect expensive sound equipment
+- Tax benefits (write offs for more equipment potentially)
+- Information added to the website is automatically protected under copyright
+- We cannot infringe upon other's copyrights/trademarks
+
+
+3. Add Real Information
+- We can get testimonials, pictures (with permission), and videos (embed linked via youtube would be a good option)
+- Need to add a description for the about page for the company
+- Maybe get a slogan of some kind or keep "level up your audio experience"
+- Could create a calendar page on the contact us to show your availability?
+
+
+4. Go Live
+- Once the domain is added and all content is in order, I will go live and create the https webpage hosted on my GitHub
+- I will also make the contact us button link to a site that will give ~50 free emails from people interested a month
+    - I also need to add a captcha to not get hit by bots submitting the form
+- I will add meta tags to the site and clean all URLs to ensure that the site comes up on google when searching for it
+- I will add website analytics to see how many people are visiting the site to improve the meta tags and data for the search engine
+
+5. Create business emails & Social Media
+- To make it look more professional, I can create emails based on the domain that is purchased (ex - booking@radaudiopeoria.com)
+- Create social media accounts to share more pictures/videos and link in the website
+
+6. Branding and Logo
+- We have logos and branding which look good but ensuring you're happy with it so we can finalize it is important
+- This is so we can create stickers, t-shirts, hats, or whatever else you want with the official logo on it
