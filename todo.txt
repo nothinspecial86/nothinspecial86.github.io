@@ -15,6 +15,7 @@ Other Examples:
 - Tax benefits (write offs for more equipment potentially)
 - Information added to the website is automatically protected under copyright
 - We cannot infringe upon other's copyrights/trademarks
+- I'm not worried about trademarks currently, but down the line if we want to protect your brand/slogan then you will get it then
 
 
 3. Add Real Information
@@ -22,7 +23,7 @@ Other Examples:
 - Need to add a description for the about page for the company
 - Maybe get a slogan of some kind or keep "level up your audio experience"
 - Could create a calendar page on the contact us to show your availability?
-
+- Depending on the real info, I will also dynamically change the site so that it looks good as currently there's a lot of temp/placeholder data
 
 4. Go Live
 - Once the domain is added and all content is in order, I will go live and create the https webpage hosted on my GitHub
@@ -38,3 +39,4 @@ Other Examples:
 6. Branding and Logo
 - We have logos and branding which look good but ensuring you're happy with it so we can finalize it is important
 - This is so we can create stickers, t-shirts, hats, or whatever else you want with the official logo on it
+- Get trademark to protect brand image

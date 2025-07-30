@@ -4172,11 +4172,13 @@ body.about-page .about-main {
   .testimonials-section::before {
   width: 85%;
 }
+}
 body.about-page #cta {
   margin-bottom: 3em; /* Adjust the value as needed */
 }
 
 /*Upcoming Events Page*/
+
 body.upcoming-events-page .gigs-section h3 {
   text-align: center;
   color: #ffffff;
@@ -4240,5 +4242,4 @@ body.upcoming-events-page .gigs-section {
   margin-top: 0em;
   width: 100%;
   }
-}
 }
