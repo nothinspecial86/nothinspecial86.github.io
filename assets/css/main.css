@@ -2565,7 +2565,7 @@ input, select, textarea {
 	max-width: 800px;
 	width: 100%;
 	padding: 3em 2em;
-	background: rgba(52, 27, 43, 0.6); /* Optional overlay box */
+	background: rgba(39, 27, 52, 0.6); /* Optional overlay box */
 	color: #fff;
 	text-align: center;
 	box-sizing: border-box;
