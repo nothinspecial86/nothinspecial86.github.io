@@ -2565,7 +2565,7 @@ input, select, textarea {
 	max-width: 800px;
 	width: 100%;
 	padding: 3em 2em;
-	background-color: #22283199; /* Optional overlay box */
+	background: rgba(39, 27, 52, 0.6); /* Optional overlay box */
 	color: #fff;
 	text-align: center;
 	box-sizing: border-box;
@@ -3546,131 +3546,91 @@ input, select, textarea {
 	}
 }
 
-
-
-
-
-
-
-
-
-/* Index HTML Description Section Header */
-/* Description Section Styles */
-.main-header {
-  --base:#f4f4f4;         /* light gray */
-  --accent:#948979;       /* warm sand */
-  --text:#222;
-  --muted:#666;
-  --surface:#ffffff;
-  --ring: rgba(148,137,121,.25);
-  --shadow: 0 10px 25px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.06);
-  font-family: 'Open Sans', sans-serif;
-  color: var(--text);
-  padding: clamp(1.5rem, 3vw, 3rem) 1rem;
-}
-
-/* Dark mode only affects this section */
-@media (prefers-color-scheme: dark) {
-  .main-header {
-    --surface: #222;
-    --text: #eaeaea;
-    --muted: #999;
-    --shadow: 0 10px 25px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.3);
+  header.special.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em 0.5em;
+    margin: 0 auto;
+    max-width: 90%;
+    text-align: center;
   }
-}
 
-/* Row */
-.main-header .header-row {
+  header.special.container h2 {
+  padding-top: 0em;
+  padding-bottom: 1em;
+  margin-top: 0em;
+  margin-bottom: 1em;
+  text-align: center;
+  white-space: normal;
+  }
+
+.header-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: clamp(1.25rem, 3vw, 2.5rem);
-  padding: clamp(1rem, 2.5vw, 2rem);
-  max-width: 1400px;
-  margin: 0 auto;
-  border: 1px solid rgba(0,0,0,.05);
-  background: var(--surface);
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-  backdrop-filter: saturate(1.05) blur(5px);
+  justify-content: center;     /* Center the whole group */
+  gap: 2em;                    /* Space between image and text */
+  padding-top: 1em;
+  padding-bottom: .5em;
+  max-width: 1000px;
+  margin: 0 auto;              /* Horizontally center the row */
+  flex-wrap: nowrap;
 }
 
-/* Image */
-.main-header .header-image img {
-  width: min(520px, 42vw);
-  max-width: 100%;
+.header-image img {
+  width: 500px;
   height: auto;
-  border-radius: 12px;
+  border-radius: 8px;
   object-fit: cover;
-  box-shadow: 0 12px 28px rgba(0,0,0,.18);
-  outline: 1px solid rgba(0,0,0,.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Text */
-.main-header .header-text {
-  max-width: 580px;
+.header-text {
+  max-width: 500px;
   text-align: left;
-  font-size: 1.05rem;
-  line-height: 1.65;
-  color: var(--text);
+  padding-top: 2em;
 }
 
-.main-header .header-text .eyebrow {
-  display: inline-block;
-  font-size: .8rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: .6rem;
-}
-
-/* Description Mobile Settings */
 @media screen and (max-width: 768px) {
-  .main-header .header-row {
+  .header-row {
     flex-direction: column;
     text-align: center;
-    padding: 1.5rem 1rem;
+    gap: 1.5em;
   }
 
-  .main-header .header-image img {
-    width: 100%;
-    max-width: 420px;
-    margin-bottom: 1.25rem;
+  .header-image img {
+    width: 400px;
+    height: auto;
   }
 
-  .main-header .header-text {
+  .header-text {
     max-width: 100%;
-    text-align: center;
-    font-size: 1rem;
-  }
-
-  .main-header .header-text .eyebrow {
-    margin-bottom: .4rem;
+	text-align: center;
+	padding: 0em 2em;
   }
 }
-
-
-
-
-
-
-
 
 /*Bands and Gigs Section*/
 .gigs-section, .bands-section {
-	background-color: #3c3c3c;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+	background-image: url('/images/background_test6.png');
+	background-color: #1a1a1a;
+	background-size: contain;         /* Stretch to cover the element */
+	background-repeat: no-repeat;   /* Prevent tiling */
+	background-position: center;    /* Center the image */
 	border-radius: 12px;
 	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 	padding: 3em 2em;
 	margin-bottom: 3em;
-	max-width: 1400px;
+	max-width: 2000px;
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
 	background-size: 100% 100%;
+}
+
+.bands-section {
+	background-image: url('/images/background_test5.png');
 }
 
 .gigs-section h3, .bands-section h3 {
@@ -3686,7 +3646,7 @@ input, select, textarea {
 }
 
 .bands-section h3 {
-  padding-top: 1em;
+  padding-top: 1em; /* Adjust value as needed */
 }
 
 .section-title {
@@ -3792,6 +3752,8 @@ body.index-page .band-divider hr {
   width: 100%;
 }
 .gigs-section, .bands-section {
+	background-image: url('/images/background_test6.png');
+	background-color: #1a1a1a;
 	background-size: contain;         /* Stretch to cover the element */
 	background-repeat: no-repeat;   /* Prevent tiling */
 	background-position: center;    /* Center the image */
@@ -3804,41 +3766,10 @@ body.index-page .band-divider hr {
 	margin-right: auto;
 	background-size: 100% 100%;
 }
-}
-/* Make the sections a positioning context */
-.gigs-section,
 .bands-section {
-  position: relative;
-  background-color: #393E46; /* base */
-  overflow: hidden;          /* hide overlay edges */
+	background-image: url('/images/background_test5.png');
 }
-
-/* Textured overlay */
-.gigs-section::before,
-.bands-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-
-  /* layered texture + vignette using your palette (#222831, #393E46, #948979) */
-  background-image:
-    radial-gradient(1200px 500px at 50% -10%, rgba(255,255,255,0.06), transparent 60%),
-    radial-gradient(900px 380px at 85% 120%, rgba(148,137,121,0.10), transparent 60%),
-    radial-gradient(700px 300px at 10% 80%, rgba(57,62,70,0.10), transparent 60%),
-    repeating-linear-gradient(
-      45deg,
-      rgba(255,255,255,0.028) 0 2px,
-      transparent 2px 6px
-    ),
-    radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.35) 100%);
-  mix-blend-mode: overlay;
-  opacity: 1;  /* turn down to ~0.85 if too strong */
 }
-
-
-
-
 
 /* Bands Page */
 .bands-section {
@@ -3899,7 +3830,7 @@ body.index-page .band-divider hr {
     margin-bottom: 2em;
   }
 
-.bands-section-bands-page {
+.bands-section {
   margin-top: 1em;
   margin-bottom: 1em;
   background-image: 
