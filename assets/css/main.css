@@ -2182,7 +2182,7 @@ input, select, textarea {
 		input[type="reset"].primary,
 		button.primary,
 		.button.primary {
-			background: #83d3c9;
+			background: #214728;
 			border-color: #83d3c9;
 			color: #fff !important;
 		}
@@ -2192,7 +2192,7 @@ input, select, textarea {
 			input[type="reset"].primary:hover,
 			button.primary:hover,
 			.button.primary:hover {
-				background: #96dad1 !important;
+				background: #62a56e !important;
 				border-color: #96dad1 !important;
 			}
 
@@ -3547,13 +3547,6 @@ input, select, textarea {
 }
 
 
-
-
-
-
-
-
-
 /* Index HTML Description Section Header */
 /* Description Section Styles */
 .main-header {
@@ -3610,7 +3603,7 @@ input, select, textarea {
 .main-header .header-text {
   max-width: 580px;
   text-align: left;
-  font-size: 1.05rem;
+  font-size: 1.5rem;
   line-height: 1.65;
   color: var(--text);
 }
@@ -3623,6 +3616,29 @@ input, select, textarea {
   color: var(--muted);
   margin-bottom: .6rem;
 }
+
+/* Main Description Buttons*/
+/* Container for buttons */
+.button-group {
+  display: flex;
+  justify-content: center;   /* center the whole group */
+  gap: 1rem;                 /* spacing between buttons */
+  flex-wrap: wrap;           /* allow wrapping on smaller screens */
+  width: 100%;               /* take full width of parent */
+  max-width: 600px;          /* optional: limit how wide it gets */
+  margin: 0 auto;            /* keep it centered */
+}
+
+/* Buttons */
+.button-group .button {
+  flex: 1 1 40%;             /* flex-grow, flex-shrink, flex-basis */
+  max-width: 45%;            /* prevents them from stretching too wide */
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 0.8em 1.2em;
+  white-space: nowrap;
+}
+
 
 /* Description Mobile Settings */
 @media screen and (max-width: 768px) {
@@ -3647,194 +3663,248 @@ input, select, textarea {
   .main-header .header-text .eyebrow {
     margin-bottom: .4rem;
   }
+  .button-group .button {
+    flex: 1 1 100%;          /* each button takes full width */
+    max-width: 100%;
+  }
 }
-
-
-
-
-
-
 
 
 /*Bands and Gigs Section*/
-.gigs-section, .bands-section {
-	background-color: #3c3c3c;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
-	border-radius: 12px;
-	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-	padding: 3em 2em;
-	margin-bottom: 3em;
-	max-width: 1400px;
-	width: 80%;
-	margin-left: auto;
-	margin-right: auto;
-	background-size: 100% 100%;
+/* === Section shell (keeps your card look consistent) ============ */
+.content-section {
+  --text:#222;
+  --muted:#666;
+  --surface:#ffffff;
+  --shadow: 0 10px 25px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.06);
+
+  font-family: 'Open Sans', sans-serif;
+  color: var(--text);
+
+  background: var(--surface);
+  border: 1px solid rgba(0,0,0,.05);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  backdrop-filter: saturate(1.05) blur(5px);
+
+  max-width: 1400px;         /* stays aligned with rest of site */
+  margin: 0 auto 2rem auto;
+  padding: clamp(1rem, 2.5vw, 2rem);
+  margin-top: 2em;
 }
 
-.gigs-section h3, .bands-section h3 {
+/* Section headings */
+.content-section h3 {
   text-align: center;
-  color: #ffffff;
-  font-size: 2em;
-  font-weight: 700;
-  margin: 0;
-  padding-top: 0;
-  padding-bottom: 1em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size: clamp(1.6rem, 2.2vw, 2rem);
+  font-weight: 800;
+  letter-spacing: .02em;
+  margin: 0 0 1.25rem 0;
+  color: var(--text);
 }
 
-.bands-section h3 {
-  padding-top: 1em;
+/* === Links: clean underline =============================== */
+.content-section a {
+  color: #000000;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(43,135,123,.55);
+  border-bottom: 0;
+}
+.content-section a:hover,
+.content-section a:focus-visible {
+  text-decoration-color: currentColor;
+  outline: none;
+  color: #5a5a5a;
 }
 
-.section-title {
-  text-align: center;
-  font-size: 2em;
-  margin-bottom: 1.5em;
-  color: #333;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 700;
-}
-
+/* === Upcoming Events ===================================== */
+.gig-list,
 .gig-list-stacked {
   list-style: none;
+  margin: 0;
   padding: 0;
-  margin: 2em auto;
-  max-width: 800px;
+  max-width: 1400px;   /* same width as shell */
+  margin-inline: auto;
+  margin-left: 3rem;
 }
 
+.gig-list li,
 .gig-list-stacked li {
-  margin-bottom: 2em;
+  padding: 1rem 0 1.1rem;
+  border-top: 1px solid #eee;
 }
-
-.gig-date {
-  font-weight: bold;
-  color: #f2c300;
-  font-size: 0.95em;
-  text-transform: uppercase;
-  margin-bottom: 0.4em;
+.gig-list li:first-child,
+.gig-list-stacked li:first-child {
+  border-top: 0;
 }
 
 .gig-title {
-  font-weight: bold;
-  font-size: 1.1em;
-  color: #ffffff;
-  margin: 0.2em 0;
+  margin: .2rem 0;
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: #111;
+  letter-spacing: .01em;
+}
+
+.gig-date {
+  margin: 0 0 .25rem 0;
+  color: #666;
+  font-weight: 700;
+  font-size: .95rem;
+  text-transform: uppercase;
+  letter-spacing: .03em;
 }
 
 .gig-location {
-  font-size: 0.95em;
-  color: #ccc;
+  margin: .2rem 0 0;
+  color: #444;
 }
 
-.gig-list-stacked hr {
-  border: none;
-  border-top: 1px solid #999;
-  margin-top: 1em;
+/* subtle row hover */
+.gig-list li:hover,
+.gig-list-stacked li:hover {
+  background: rgba(205, 205, 205, 0.02);
+  border-radius: 8px;
+  padding-left: .5rem;
+  transition: background .15s ease, padding .15s ease;
 }
 
+/* === Featured Bands ====================================== */
 .band-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 300px 1fr;
   align-items: center;
-  gap: 1.2em;
-  margin-bottom: 2em;
+  gap: 1.25rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid #eee;
+  max-width: 1400px; /* keep aligned */
+  margin-inline: auto;
+}
+.band-item:first-of-type { border-top: 0; }
+
+.band-item:hover {
+  background: rgba(170, 170, 170, 0.02);
+  border-radius: 10px;
+  padding-left: .5rem;
+  transition: background .15s ease, padding .15s ease;
 }
 
 .band-image {
   width: 300px;
   height: auto;
   object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0,0,0,.08);
+}
+
+.band-info {
+  max-width: 65ch;
 }
 
 .band-info h4 {
-  margin: 0 0 0.3em 0;
-  font-size: 1.1em;
-  color:  #f2c300;
+  margin: 0 0 .4rem 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: .01em;
 }
 
 .band-info p {
-  font-size: 0.95em;
-  
+  margin: .35rem 0;
+  color: #444;
+  line-height: 1.6;
 }
 
-body.index-page .band-divider hr {
-  border: none;
-  height: 2px;
-  background: #f2c300;
-  box-shadow: 0 0 8px #f2c300;
-  margin: 2em auto;
-  width: 85%;
+.band-info p strong {
+  color: #222;
+  font-weight: 800;
 }
 
-@media screen and (max-width: 768px) {
-  .gig-item, .band-item {
+/* Mobile stacking */
+@media (max-width: 768px) {
+  .content-section {
+    width: 95%;
+    padding: 1.25rem;
+  }
+  .band-item {
+    grid-template-columns: 1fr;
+    align-items: start;
+    text-align: center;
+  }
+  .band-image {
+    width: min(360px, 100%);
+    height: auto;
+    margin-inline: auto;
+  }
+  .band-info {
+    margin-inline: auto;
+    text-align: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .gig-list li,
+  .gig-list-stacked li,
+  .band-item {
+    padding: .9rem 0 1rem;
+  }
+  .gig-list,
+  .gig-list-stacked{
+    margin-left: .4rem;
+  }
+}
+/* Upcoming Events: add side image without altering existing styles */
+.upcoming-events .events-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.upcoming-events .events-list {
+  flex: 2; /* your UL stays the primary column */
+}
+
+/* Make the wrapper establish a tall cross-axis (height = tallest column) */
+.upcoming-events .events-wrapper{
+  display: flex;           /* you likely already have this */
+  align-items: stretch;    /* let items use the full wrapper height */
+}
+
+/* Image column: center *the whole column* within the wrapper */
+.upcoming-events .events-image{
+  flex: 1;
+  min-width: 575px;
+  align-self: center;      /* <-- key: center this column vertically */
+  display: flex;           /* center the <img> inside the column too */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Image itself */
+.upcoming-events .events-image img{
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.10);
+}
+
+
+
+/* Stack on mobile */
+@media (max-width: 768px) {
+  .upcoming-events .events-wrapper {
     flex-direction: column;
   }
-
-  .gig-description {
-    border-left: none;
-    padding-left: 0;
-    margin-top: 0.5em;
+  .upcoming-events .events-image {
+    order: 2;            /* image after list on mobile */
+    margin-top: 0.75rem;
   }
-
-.band-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 0;
-  margin: 0 auto;
-  width: 100%;
-}
-.gigs-section, .bands-section {
-	background-size: contain;         /* Stretch to cover the element */
-	background-repeat: no-repeat;   /* Prevent tiling */
-	background-position: center;    /* Center the image */
-	border-radius: 12px;
-	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-	padding: 3em 2em;
-	margin-bottom: 3em;
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	background-size: 100% 100%;
-}
-}
-/* Make the sections a positioning context */
-.gigs-section,
-.bands-section {
-  position: relative;
-  background-color: #393E46; /* base */
-  overflow: hidden;          /* hide overlay edges */
 }
 
-/* Textured overlay */
-.gigs-section::before,
-.bands-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
 
-  /* layered texture + vignette using your palette (#222831, #393E46, #948979) */
-  background-image:
-    radial-gradient(1200px 500px at 50% -10%, rgba(255,255,255,0.06), transparent 60%),
-    radial-gradient(900px 380px at 85% 120%, rgba(148,137,121,0.10), transparent 60%),
-    radial-gradient(700px 300px at 10% 80%, rgba(57,62,70,0.10), transparent 60%),
-    repeating-linear-gradient(
-      45deg,
-      rgba(255,255,255,0.028) 0 2px,
-      transparent 2px 6px
-    ),
-    radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.35) 100%);
-  mix-blend-mode: overlay;
-  opacity: 1;  /* turn down to ~0.85 if too strong */
-}
+
 
 
 
