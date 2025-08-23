@@ -4102,131 +4102,173 @@ body.contact-page .contact-box {
 
 
 
-/* About Page */
-/* === About Page (match Events/Contact style; CTA untouched) ====== */
+/* ===== About Page base ===== */
 body.about-page {
-  background-color: #f9fbfc;    /* same site background */
+  background-color: #f9fbfc;
   padding-top: 3em;
 }
 
-/* Main card */
+/* ===== Main About card ===== */
 .about-main {
-margin-top: 2.5em;
-margin-bottom: 3em;
+  margin-top: 2.5em;
+  margin-bottom: 3em;
 }
+
 .about-section {
-background: #ffffff;
-border: 1px solid rgba(0,0,0,.06);
-border-radius: 14px;
-box-shadow: 0 10px 25px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
-max-width: 1100px;
-margin: 0 auto;
-padding: 2em 1.5em;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+  max-width: 1250px;              /* wider shell */
+  margin: 0 auto;
+  padding: 2em 1.5em;
 }
 
 /* Headings + tagline */
 .about-section h2 {
-font-size: 2em;
-font-weight: 800;
-color: #000;
-text-align: center;
-margin-bottom: 0.5em;
+  font-size: 2em;
+  font-weight: 800;
+  color: #000;
+  text-align: center;
+  margin-bottom: 0.5em;
 }
 .about-section .tagline {
-font-size: 1.1em;
-font-weight: 400;
-color: #333;
-text-align: center;
+  font-size: 1.1em;
+  font-weight: 400;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1.5em;
 }
 
-/* Body text */
+/* Body text — widen to match the new shell */
 .about-content p {
-font-size: 1.05em;
-line-height: 1.7;
-color: #222;
-margin: 0 auto 2em auto;
-max-width: 850px;
-text-align: left;
-margin-top: 1em;
+  font-size: 1.05em;
+  line-height: 1.7;
+  color: #222;
+  margin: 1em auto 2em auto;
+  max-width: 1150px;              /* was 1125/850; now matches wider card */
+  text-align: left;
 }
 
-/* Optional: image next to/about the text (drop in an <img> with class="about-image") */
+/* Optional image + text layout */
 .about-content-wrap {
-display: flex;
-gap: 2rem;
-align-items: center;
-justify-content: center;
-flex-wrap: wrap; /* stacks on small screens */
-max-width: 1000px;
-margin: 0 auto;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;                 /* stacks on small screens */
+  max-width: 1150px;               /* align with text width */
+  margin: 0 auto;
 }
 .about-image {
-flex: 1 1 320px;
-max-width: 540px;
-border-radius: 12px;
-box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-width: 100%;
-height: auto;
+  flex: 1 1 360px;
+  max-width: 540px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  width: 100%;
+  height: auto;
 }
 .about-text {
-flex: 2 1 520px;
+  flex: 2 1 520px;
 }
 
-/* === Testimonials (card section) ================================ */
+/* ===== Testimonials card (wider) ===== */
 .testimonials-section {
-background: none;
+  background: none;
 }
 .testimonials-wrapper {
-background: #ffffff;
-border: 1px solid rgba(0,0,0,.06);
-border-radius: 14px;
-box-shadow: 0 10px 25px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
-max-width: 1100px;
-margin: 0 auto 3em auto;
-padding: 2em 1.5em;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+  max-width: 1250px;               /* match About width */
+  margin: 0 auto 3em auto;
+  padding: 2em 1.5em;
 }
 .testimonials-special h2 {
-text-align: center;
-font-size: 2em;
-font-weight: 800;
-color: #000;
-margin-bottom: 1em;
+  text-align: center;
+  font-size: 2em;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 1em;
 }
 
-/* Individual quotes */
+/* Keep quote text comfortably wide inside the 1250px shell */
+.testimonials {
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
 .testimonials blockquote {
-background: #f9fbfc;
-border-left: 4px solid #000;
-border-radius: 8px;
-padding: 1.25em;
-margin: 1.25em 0;
-font-style: italic;
-color: #333;
-line-height: 1.6;
+  background: #f9fbfc;
+  border-left: 4px solid #000;
+  border-radius: 8px;
+  padding: 1.25em;
+  margin: 1.25em 0;
+  font-style: italic;
+  color: #333;
+  line-height: 1.6;
 }
 .testimonial-name {
-display: block;
-margin-top: 0.75em;
-font-weight: 600;
-color: #000;
+  display: block;
+  margin-top: 0.75em;
+  font-weight: 600;
+  color: #000;
 }
 
-/* === Mobile tweaks ============================================= */
+/* Keep your CTA as-is but cap width to 1250 to align */
+body.about-page #cta {
+  max-width: 1250px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== Mobile tweaks ===== */
 @media screen and (max-width: 840px) {
-.about-section,
-.testimonials-wrapper {
-	width: 95%;
-	padding: 1.5em;
+  .about-section,
+  .testimonials-wrapper {
+    width: 95%;
+    padding: 1.5em;
+  }
+  .about-section h2,
+  .testimonials-special h2 {
+    font-size: 1.6em;
+  }
+  body.about-page {
+    padding-top: 0;
+  }
+  .testimonials {
+    max-width: 100%;
+  }
 }
-.about-section h2,
-.testimonials-special h2 {
-	font-size: 1.6em;
+/* Add breathable side padding to the card at all sizes */
+.about-section {
+  padding: clamp(1.25em, 3vw, 2em) clamp(1em, 4vw, 1.75em);
 }
-body.about-page {
-  background-color: #f9fbfc;    /* same site background */
-  padding-top: 0em;
+
+/* Give paragraphs their own inline padding so they never touch the wall */
+.about-content p {
+  padding-inline: clamp(.5rem, 3vw, 1.25rem);
+  margin-inline: auto;          /* keep centered within the card */
+  max-width: 1150px;            /* your desired readable line length */
 }
+
+/* If you use the side-by-side image/text wrapper, add a little guardrail */
+.about-content-wrap {
+  padding-inline: clamp(.5rem, 3vw, 1.25rem);
 }
+
+/* Tighten even more on small screens / high zoom */
+@media (max-width: 840px) {
+  .about-section {
+    padding: 1.25em 1rem;
+  }
+  .about-content p {
+    max-width: 100%;
+    padding-inline: 1rem;       /* ensure space from the edge */
+  }
+}
+
 
 
 
