@@ -3558,7 +3558,7 @@ input, select, textarea {
   margin-top: 2em;
 }
 
-/* Dark mode only affects this section */
+/* Dark mode only affects this section
 @media (prefers-color-scheme: dark) {
   .main-header {
     --surface: #222;
@@ -3567,6 +3567,7 @@ input, select, textarea {
     --shadow: 0 10px 25px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.3);
   }
 }
+*/
 
 /* Row */
 .main-header .header-row {
@@ -3895,14 +3896,28 @@ input, select, textarea {
 /* Stack on mobile */
 @media (max-width: 768px) {
   .upcoming-events .events-wrapper {
-    flex-direction: column;
+    flex-direction: column;  /* stack instead of side-by-side */
+    align-items: center;
   }
+
+  .upcoming-events .events-list {
+    order: 1;                /* keep text/events first */
+    width: 100%;
+  }
+
   .upcoming-events .events-image {
-    order: 2;            /* image after list on mobile */
-    margin-top: 0.75rem;
+    order: 2;                /* image goes under */
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
   }
-  .upcoming-events .events-image img{
-    max-width: 90%;
+
+  .upcoming-events .events-image img {
+    max-width: 50%;
+    height: auto;
+    border-radius: 20px;
+    object-fit: contain;
   }
 }
 
@@ -4039,22 +4054,6 @@ body.contact-page .contact-box textarea {
   font-size: 1em;
 }
 
-/* Submit button */
-body.contact-page .contact-box input[type="submit"] {
-  background-color: #214728;
-  color: #fff;
-  font-weight: 700;
-  padding: 0.9em 2em;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-  margin-bottom: -10em;
-}
-body.contact-page .contact-box input[type="submit"]:hover {
-  background-color: #62a56e;
-}
-
 /* === Headings & icon ==================================== */
 body.contact-page .contact-title-container {
   text-align: center;
@@ -4099,7 +4098,54 @@ body.contact-page .contact-box {
   padding: 2em 1.5em 0.25em !important;
 }
 
+/* Submit button container */
+body.contact-page .contact-box .buttons {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 1rem 0 0;
+  width: 100%;               /* never wider than the card */
+  box-sizing: border-box;
+}
 
+body.contact-page .contact-box .buttons li {
+  list-style: none;
+  margin: 0;
+  width: 100%;               /* li can’t expand beyond card */
+  max-width: 100%;
+  display: flex;
+  justify-content: center;   /* keep button centered inside */
+}
+
+/* Submit button itself */
+body.contact-page .contact-box input[type="submit"] {
+  background-color: #214728;  /* dark green */
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+
+  width: 100%;                /* responsive */
+  max-width: 480px;           /* limit on desktop */
+  box-sizing: border-box;
+  font-size: 1rem;
+  padding: 0.9em 2em;
+}
+
+body.contact-page .contact-box input[type="submit"]:hover {
+  background-color: #62a56e;  /* lighter green hover */
+}
+
+/* Mobile tweaks */
+@media screen and (max-width: 760px) {
+  body.contact-page .contact-box input[type="submit"] {
+    max-width: 100%;          /* now forced inside card */
+    font-size: .95rem;
+    padding: 0.8rem 1rem;
+  }
+}
 
 
 /* ===== About Page base ===== */
@@ -4511,16 +4557,26 @@ body.upcoming-events-page .gigs-section {
 
 }
 
-@media screen and (max-width: 600px) {
-  /* Stack badge above details */
+@media screen and (max-width: 760px) {
+  /* Stack badge and details vertically */
   .gig-item {
-    grid-template-columns: 1fr;
-    gap: .75rem;
-    align-items: start;
+    display: flex;             /* kill the grid forcing columns */
+    flex-direction: column;    /* stack vertically */
+    align-items: center;       /* center badge + text horizontally */
+    text-align: center;        /* center text inside */
   }
+
   .gig-badge {
     width: 140px;
-    margin: 0 auto; /* center the badge */
+    margin-bottom: 0.75rem;
+  }
+
+  /* Explicit text centering */
+  .gig-item h2,
+  .gig-item p {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
