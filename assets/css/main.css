@@ -2627,6 +2627,8 @@ input, select, textarea {
 	letter-spacing: 0.1em;
 	margin: 1em 0 0 0;
 	text-transform: uppercase;
+	font-size: 2.3rem;
+	color: #ffffff;
 }
 
 /* Button link style */
@@ -2676,7 +2678,7 @@ input, select, textarea {
 
 /* CTA */
 #cta {
-  background-color: #f5f7fa;
+  background-color: #ffffff;
   padding: 5em 2em;
   text-align: center;
   display: flex;
@@ -2699,15 +2701,13 @@ input, select, textarea {
 }
 
 #cta p {
-  font-size: 1.2em;
+  font-size: 1.8rem;
   color: #444;
   line-height: 1.6;
   margin-bottom: 2em;
 }
 
 #cta .button.primary {
-  background-color: #000000;
-  color: #000;
   font-size: 1em;
   padding: 0.75em 0em;
   border-radius: 6px;
@@ -2717,14 +2717,9 @@ input, select, textarea {
   display: inline-block;
 }
 
-#cta .button.primary:hover {
-  background-color: #000000;
-  color: #000000;
-}
-
 /* Footer */
 #footer {
-  background-color: #f5f7fa;
+  background-color: #ffffff;
   padding: 1em 2em;
   width: 100%;
   box-sizing: border-box;
@@ -2732,7 +2727,7 @@ input, select, textarea {
 }
 
 .footer-inner {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -2751,7 +2746,7 @@ input, select, textarea {
 }
 
 #footer .icons a {
-  background-color: #ffcc00;
+  background-color: #62a56e;
   color: #000;
   width: 36px;
   height: 36px;
@@ -2764,10 +2759,10 @@ input, select, textarea {
   text-decoration: none;
   transition: all 0.3s ease;
 }
-
+/*62a56e*/
 #footer .icons a:hover {
-  background-color: #e6b800;
-  color: #fff;
+  background-color: #7fd58e;
+  color: #1b1b1b;
 }
 
 #footer .copyright li {
@@ -3560,6 +3555,7 @@ input, select, textarea {
   font-family: 'Open Sans', sans-serif;
   color: var(--text);
   padding: clamp(1.5rem, 3vw, 3rem) 1rem;
+  margin-top: 2em;
 }
 
 /* Dark mode only affects this section */
@@ -3805,7 +3801,7 @@ input, select, textarea {
 
 .band-info h4 {
   margin: 0 0 .4rem 0;
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   font-weight: 800;
   color: #111;
   letter-spacing: .01em;
@@ -3813,13 +3809,13 @@ input, select, textarea {
 
 .band-info p {
   margin: .35rem 0;
-  color: #444;
+  color: #323232;
   line-height: 1.6;
 }
 
 .band-info p strong {
-  color: #222;
-  font-weight: 800;
+  color: #161616;
+  font-weight: 675;
 }
 
 /* Mobile stacking */
@@ -3855,7 +3851,7 @@ input, select, textarea {
     margin-left: .4rem;
   }
 }
-/* Upcoming Events: add side image without altering existing styles */
+
 .upcoming-events .events-wrapper {
   display: flex;
   align-items: flex-start;
@@ -3875,7 +3871,7 @@ input, select, textarea {
 /* Image column: center *the whole column* within the wrapper */
 .upcoming-events .events-image{
   flex: 1;
-  min-width: 575px;
+  min-width: 700px;
   align-self: center;      /* <-- key: center this column vertically */
   display: flex;           /* center the <img> inside the column too */
   align-items: center;
@@ -3886,11 +3882,14 @@ input, select, textarea {
 .upcoming-events .events-image img{
   max-width: 100%;
   height: auto;
-  border-radius: 12px;
+  border-radius: 25px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.10);
 }
 
-
+.content-section {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
 
 /* Stack on mobile */
 @media (max-width: 768px) {
@@ -3901,10 +3900,10 @@ input, select, textarea {
     order: 2;            /* image after list on mobile */
     margin-top: 0.75rem;
   }
+  .upcoming-events .events-image img{
+    max-width: 90%;
+  }
 }
-
-
-
 
 
 
@@ -4313,7 +4312,7 @@ body.about-page .about-main {
 }
 }
 body.about-page #cta {
-  margin-bottom: 3em; /* Adjust the value as needed */
+  margin-bottom: 3em;
 }
 
 /*Upcoming Events Page*/
