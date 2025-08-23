@@ -3770,7 +3770,7 @@ input, select, textarea {
 /* === Featured Bands ====================================== */
 .band-item {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 400px 1fr;
   align-items: center;
   gap: 1.25rem;
   padding: 1.25rem 0;
@@ -3788,7 +3788,7 @@ input, select, textarea {
 }
 
 .band-image {
-  width: 300px;
+  width: 400px;
   height: auto;
   object-fit: cover;
   border-radius: 12px;
@@ -3811,6 +3811,7 @@ input, select, textarea {
   margin: .35rem 0;
   color: #323232;
   line-height: 1.6;
+  font-size: 1.4rem;
 }
 
 .band-info p strong {
@@ -3986,340 +3987,263 @@ input, select, textarea {
   
 }
 
-/* Contact Page Image Header */
-.contact-header {
+/* Contact Page */
+/* === Contact Header Card ================================= */
+body.contact-page .contact-header-box {
+  background: #ffffff; 
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+  max-width: 1400px; 
+  margin: 0 auto 2.5em auto;
+  padding: 2em 1.5em;
   text-align: center;
-  margin-top: 5em;
-  margin-bottom: 1em;
 }
 
-.contact-header-image {
-  max-width: 100%;
+body.contact-page .contact-header-image {
+  max-width: 420px;
   height: auto;
-  width: 500px;
-  display: inline-block;
-  margin-top: 1em; /* Merged in from below */
+  margin: 0 auto 1em;
+  display: block;
 }
 
-/* Subtitle under image */
-.contact-subtitle {
+body.contact-page .contact-subtitle {
   font-size: 1.1em;
-  color: #222;
+  color: #444;
   line-height: 1.6;
-  margin-top: 1em;
-  margin-bottom: -2em; /* Reduced spacing below */
+  margin: 0.5em auto 0;
+  max-width: 800px;
 }
 
-/* Mobile adjustments */
-@media screen and (max-width: 840px) {
-  .contact-header {
-    margin-top: 10px;
-  }
-
-  .contact-header-image {
-    width: 90%;
-    margin-top: -1em;
-  }
-
-  .contact-subtitle {
-    font-size: 1em;
-    margin-top: 1em;
-    margin-bottom: 0.5em; /* Keep consistent on mobile */
-  }
-}
-
-body.contact-page {
-  background-image: url('/images/background_test6.png');
-  background-color: #cecece;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-}
-
-/* Add a dark semi-transparent overlay */
-body.contact-page::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.05); /* Adjust opacity (0.4 = 40% dark overlay) */
-  z-index: -1;
-}
-
-.contact-header-box {
-  background-color: white;
-  padding: 2em 2em;
-  border-radius: 8px;
-  max-width: 1500px;
-  margin: 0 auto;
-  text-align: center;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-.contact-box {
-  background-color: white;
+/* === Contact Form Card ================================== */
+body.contact-page .contact-box {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
   width: 80%;
-  margin: 1em auto;
-  padding: 0;
-  border-radius: 12px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
-  position: relative;
+  max-width: 1250px;
+  margin: 0 auto 5em;
+  padding: 2em 1.5em;
+  margin-top: 5em;
 }
 
-/* Mobile tweaks */
-@media screen and (max-width: 840px) {
-  .contact-box {
-    width: 100%;
-    padding: 2em;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
-    position: relative;
-    z-index: 2;
-    border-radius: 12px;
-  }
-
-  .contact-header p {
-	margin-left: 0em;
-	margin-right: 0em;
-}
-.contact-icon-bg {
-  font-size: 120px;     /* Make the icon large */
-  color: #000;          /* Match background */
-  opacity: 0.1;         /* Make it faded */
-  margin-top: 0em;
-}
+/* Form controls */
+body.contact-page .contact-box input,
+body.contact-page .contact-box textarea {
+  width: 100%;
+  padding: 0.8em;
+  margin-bottom: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
 }
 
-/* Style only the Send Message button inside the contact box */
-.contact-box input[type="submit"] {
-  background-color: #000000; /* Yellow background */
-  color: #ffffff;               /* Black text */
-  font-weight: bold;
-  padding: 0.8em 2em;
+/* Submit button */
+body.contact-page .contact-box input[type="submit"] {
+  background-color: #214728;
+  color: #fff;
+  font-weight: 700;
+  padding: 0.9em 2em;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.25s ease;
+  margin-bottom: -10em;
+}
+body.contact-page .contact-box input[type="submit"]:hover {
+  background-color: #62a56e;
 }
 
-.contact-box input[type="submit"]:hover {
-  background-color: #e6b800; /* Slightly darker on hover */
-}
-
-.contact-title-container {
-  position: relative;
-  display: inline-block;
+/* === Headings & icon ==================================== */
+body.contact-page .contact-title-container {
   text-align: center;
 }
-
-.contact-title-container h2 {
-  position: center;
-  color: #7b7b7b;
+body.contact-page .contact-title-container h2 {
+  font-size: 2em;
+  font-weight: 800;
+  color: #000;
+  margin: 0 0 1rem 0;
+}
+body.contact-page .contact-icon-bg {
+  display: block;
+  font-size: 6em;
+  opacity: 0.4;
+  color: #214728;
 }
 
-.contact-icon-bg {
-  font-size: 120px;     /* Make the icon large */
-  color: #000;          /* Match background */
-  opacity: 0.1;         /* Make it faded */
-  margin-top: 15px;
+/* === Responsive tweaks ================================== */
+@media screen and (max-width: 840px) {
+  body.contact-page .contact-header-box,
+  body.contact-page .contact-box {
+    width: 95%;
+    padding: 1.5em;
+  }
+  body.contact-page .contact-header-image {
+    width: 90%;
+    max-width: 320px;
+  }
+  body.contact-page .contact-subtitle {
+    font-size: 1em;
+  }
+  body.contact-page .contact-box { 
+    margin-top: 0em;
+  }
 }
 
-.contact-header p {
-	margin-left: 1em;
-	margin-right: 1em;
+body.contact-page .contact-box {
+  margin-bottom: 4rem !important;
 }
+
+body.contact-page .contact-box {
+  padding: 2em 1.5em 0.25em !important;
+}
+
+
+
 
 /* About Page */
+/* === About Page (match Events/Contact style; CTA untouched) ====== */
 body.about-page {
-  background-image: url('/images/background_test5.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: #f9fbfc;    /* same site background */
+  padding-top: 3em;
 }
 
-body.about-page .wrapper.style1,
-body.about-page .about-main {
-  background: transparent;
-  box-shadow: none;
-}
-
+/* Main card */
 .about-main {
-	margin-top: 4.5em;
-	margin-bottom: 4em;
+margin-top: 2.5em;
+margin-bottom: 3em;
 }
-.about-main p {
-	text-align: left;
+.about-section {
+background: #ffffff;
+border: 1px solid rgba(0,0,0,.06);
+border-radius: 14px;
+box-shadow: 0 10px 25px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+max-width: 1100px;
+margin: 0 auto;
+padding: 2em 1.5em;
 }
 
+/* Headings + tagline */
 .about-section h2 {
-  font-size: 2.5em;
-  color: #f2c300;
-  margin-bottom: 0.2em;
+font-size: 2em;
+font-weight: 800;
+color: #000;
+text-align: center;
+margin-bottom: 0.5em;
 }
-
 .about-section .tagline {
-  font-size: 1.2em;
-  font-weight: 300;
-  color: #ffffff;
-  text-align: center;
-  margin-bottom: .1em;
+font-size: 1.1em;
+font-weight: 400;
+color: #333;
+text-align: center;
 }
 
+/* Body text */
 .about-content p {
-  font-size: 1.05em;
-  line-height: 1.5em;
-  color: #eaeaea;
-  background: rgba(255, 255, 255, 0.05);
-  font-style: italic;
-  border-radius: 8px;
-  box-shadow: 0 0 0px #000000, 0 0 3px #f2c300;
-  line-height: 1.7;
-  padding: 1.5em;
+font-size: 1.05em;
+line-height: 1.7;
+color: #222;
+margin: 0 auto 2em auto;
+max-width: 850px;
+text-align: left;
+margin-top: 1em;
 }
 
-.testimonials blockquote {
-	margin: 2em, 1em;
+/* Optional: image next to/about the text (drop in an <img> with class="about-image") */
+.about-content-wrap {
+display: flex;
+gap: 2rem;
+align-items: center;
+justify-content: center;
+flex-wrap: wrap; /* stacks on small screens */
+max-width: 1000px;
+margin: 0 auto;
+}
+.about-image {
+flex: 1 1 320px;
+max-width: 540px;
+border-radius: 12px;
+box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+width: 100%;
+height: auto;
+}
+.about-text {
+flex: 2 1 520px;
 }
 
+/* === Testimonials (card section) ================================ */
 .testimonials-section {
-  background: none;
-  padding: 3em 1em;
-  display: flex;
-  justify-content: center;
+background: none;
 }
-
 .testimonials-wrapper {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 12px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-  color: #fff;
-  width: 100%;
-  max-width: 1400px; /* restrict to centered frame */
-  margin: 0 auto;
+background: #ffffff;
+border: 1px solid rgba(0,0,0,.06);
+border-radius: 14px;
+box-shadow: 0 10px 25px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+max-width: 1100px;
+margin: 0 auto 3em auto;
+padding: 2em 1.5em;
+}
+.testimonials-special h2 {
+text-align: center;
+font-size: 2em;
+font-weight: 800;
+color: #000;
+margin-bottom: 1em;
 }
 
-.testimonials-special {
-  background: transparent; /* prevent light blue background */
-}
-
-.testimonials-section {
-  background: none; /* remove outer full-width background */
-  padding: 3em 1em;
-}
-
-.testimonials-section {
-  position: relative;
-  z-index: 1; /* Ensure it's above background */
-}
-
-/* Glowing top border only */
-.testimonials-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 74%;
-  height: 2.5px;
-  background: rgba(242, 195, 0, 0.5);
-  box-shadow:
-    0 0 8px rgba(242, 195, 0, 0.5),
-    0 0 16px rgba(242, 195, 0, 0.4),
-    0 0 32px rgba(242, 195, 0, 0.3),
-    0 0 64px rgba(242, 195, 0, 0.2);
-  z-index: 2;
-	background-position: center;
-}
-
-.testimonials-section h2 {
-  text-align: center;
-  color: rgb(242, 195, 0);
-  font-size: 2.5em;
-}
-
+/* Individual quotes */
 .testimonials blockquote {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1em;
-  border-left: 4px solid #f2c300;
-  font-style: italic;
-  border-radius: 8px;
-  
-  /* Background image */
-  background-image: url('/images/background_test6.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  /* Glowing */
-  box-shadow: 0 0 10px #000000, 0 0 20px #f2c300;
+background: #f9fbfc;
+border-left: 4px solid #000;
+border-radius: 8px;
+padding: 1.25em;
+margin: 1.25em 0;
+font-style: italic;
+color: #333;
+line-height: 1.6;
 }
-
 .testimonial-name {
-  display: block;
-  margin-top: 1em;
-  font-weight: bold;
-  color: #f2c300;
+display: block;
+margin-top: 0.75em;
+font-weight: 600;
+color: #000;
 }
 
-/* Mobile tweaks About Page*/
+/* === Mobile tweaks ============================================= */
 @media screen and (max-width: 840px) {
-  .about-main {
-    margin-top: 0;
-    padding: 0;
-  }
-  .about-section h2 {
-	font-size: 1.7em;
-  }
-  .about-section p {
-	font-size: .8em;
-  }
-  .about-content {
-	margin-bottom: .5em;
+.about-section,
+.testimonials-wrapper {
+	width: 95%;
+	padding: 1.5em;
 }
-  .testimonials blockquote {
-	box-shadow: 0 0 0px #000000, 0 0 10px #f2c300;
-  }
-  body.about-page {
-  background-image: 
-    url('/images/background_test5.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.about-section h2,
+.testimonials-special h2 {
+	font-size: 1.6em;
 }
-  .testimonials-wrapper {
-    width: 100vw; /* Full viewport width */
-    max-width: 100vw;
-    margin: 0;
-    padding: 2em 1em;
-    border-radius: 0; /* Optional: remove rounded corners on mobile */
-  }
+body.about-page {
+  background-color: #f9fbfc;    /* same site background */
+  padding-top: 0em;
+}
+}
 
-  .testimonials-special {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
 
-  .testimonials-section {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  .testimonials-section::before {
-  width: 85%;
-}
-}
-body.about-page #cta {
-  margin-bottom: 3em;
-}
+
+
 
 /*Upcoming Events Page*/
 
+/* === Upcoming Events: Card Shell =================================== */
+body.upcoming-events-page {
+  background-color: #f9fbfc;
+  padding-top: 3.5em;
+}
+
+/* Keep your existing heading styles; just tighten spacing on desktop */
 body.upcoming-events-page .gigs-section h3 {
   text-align: center;
-  color: #ffffff;
+  color: #000000;
   font-size: 2em;
   font-weight: 700;
   margin: 0;
@@ -4329,55 +4253,208 @@ body.upcoming-events-page .gigs-section h3 {
   letter-spacing: 1px;
 }
 
+/* Card container aligned with rest of site */
+body.upcoming-events-page .gigs-section {
+  margin-top: 2.5em;                 /* slightly tighter */
+  margin-bottom: 3em;
+  width: 80%;
+  max-width: 1400px;                 /* match site width */
+  margin-left: auto;
+  margin-right: auto;
+
+  background: #ffffff;               /* clean card */
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+  padding: 1.5em 1.25em 1.75em;
+}
+
+/* Inner wrapper to control readable line length */
+.events-inner {
+  max-width: 1000px;                 /* comfy content width */
+  margin: 0 auto;
+}
+
+/* === Event List ===================================================== */
 body.upcoming-events-page .gig-list-stacked {
   list-style: none;
   padding: 0;
-  margin: 2em auto;
-  max-width: 1000px;
+  margin: 0;                         /* we’ll handle spacing per row */
 }
 
-body.upcoming-events-page .gig-list-stacked li {
-  margin-bottom: 2.5em;
+/* Each row becomes a small grid: date badge + details */
+.gig-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1.25rem;
+  align-items: center;
+  padding: 1rem 0;
+  border-top: 1px solid #eaeaea;
+}
+
+.gig-item:first-child {
+  border-top: 0;
+  padding-top: 0.25rem;
+}
+
+/* Date badge (uses your black/gray palette) */
+.gig-badge {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 110px;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  background: #f7f7f7;
+  text-align: center;
+}
+
+.gig-badge .month {
+  display: block;
+  font-size: 1rem;
+  font-weight: 1000;
+  letter-spacing: .08em;
+  color: #000;
+}
+
+.gig-badge .day {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #2d2d2d;
+  line-height: 1.2;
+}
+
+.gig-badge .time {
+  display: block;
+  font-size: 0.78rem;
+  color: #2d2d2d;
+  margin-top: 2px;
+  font-weight: bold;
+}
+
+/* Event details (keeps your colors) */
+body.upcoming-events-page .gig-title {
+  margin: 0 0 .35rem 0;
+  font-weight: 800;
+  font-size: 1.3em;
+  color: #2d2d2d;
 }
 
 body.upcoming-events-page .gig-date {
+  margin: 0 0 .35rem 0;
   font-weight: bold;
-  color: #f2c300;
-  font-size: 0.95em;
+  color: #000000;
+  font-size: 1.06em;
   text-transform: uppercase;
-  margin-bottom: 0.4em;
-}
-
-body.upcoming-events-page .gig-title {
-  font-weight: bold;
-  font-size: 1.1em;
-  color: #ffffff;
-  margin: 0.2em 0;
+  letter-spacing: .03em;
 }
 
 body.upcoming-events-page .gig-location {
-  font-size: 0.95em;
-  color: #ccc;
+  margin: 0.1em 0 0 0;
+  font-size: 1.06em;
+  color: #000000;
 }
 
-body.upcoming-events-page .gig-list-stacked hr {
-  border: none;
-  border-top: 1px solid #999;
-  margin-top: 1em;
+/* softer divider (replaces the <hr> visually) */
+.hr {
+  display: none; /* hide the old <hr>, the border-top handles it */
 }
 
-body.upcoming-events-page {
-	background-color: #f9fbfc;
+/* Row hover for scanability */
+.gig-item:hover {
+  background: rgba(0,0,0,.02);
+  border-radius: 10px;
+  padding-left: .5rem;
+  transition: background .15s ease, padding .15s ease;
 }
 
-body.upcoming-events-page .gigs-section {
-  margin-top: 4em;
-  width: 80%;
+/* === Responsive ===================================================== */
+@media screen and (max-width: 980px) {
+  .gig-item {
+    grid-template-columns: 100px 1fr;
+  }
 }
 
 @media screen and (max-width: 840px) {
- body.upcoming-events-page .gigs-section {
-  margin-top: 0em;
-  width: 100%;
+  body.upcoming-events-page .gigs-section {
+    margin-top: 0em;
+    width: 95%;
+    padding: 1rem 1rem 1.25rem;
   }
 }
+
+@media screen and (max-width: 600px) {
+  /* Stack badge above details */
+  .gig-item {
+    grid-template-columns: 1fr;
+    gap: .75rem;
+    align-items: start;
+  }
+  .gig-badge {
+    width: 140px;
+    margin: 0 auto; /* center the badge */
+  }
+}
+
+/* Links inside the gigs section: keep them dark & underlined */
+.gigs-section .gig-location a {
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Past state */
+.gigs-section .gig-item.is-past {
+  opacity: 0.55;
+  filter: grayscale(20%);
+}
+
+/* Keep badge readable when greyed */
+.gigs-section .gig-item.is-past .gig-badge {
+  opacity: 0.85;
+}
+
+/* ===== Events Hero – preserve full 1550×600 image ===== */
+.events-hero-wide {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  background: #0f0f0f;          /* letterbox color on narrow screens */
+}
+
+.events-hero-wide img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;          /* <-- no cropping */
+  object-position: center;
+}
+
+/* Optional: softer overlay so text on top stays readable */
+.events-hero-wide::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,0.18) 0%,
+    rgba(0,0,0,0.10) 40%,
+    rgba(0,0,0,0.22) 100%);
+  pointer-events: none;
+}
+
+/* Keep the content that follows nicely spaced */
+.events-section {
+  max-width: 1100px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+.events-heading {
+  text-align: center;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  margin-bottom: 1rem;
+}
+
+

@@ -14,7 +14,7 @@
 				<header id="header">
 					<h1 id="logo">
 						<a href="index.html">
-							<img src="/images/sound-png-20.png" alt="Logo Icon" class="logo-icon" />
+							<img src="/images/sound_logo.gif" alt="Logo Icon" class="logo-icon" />
 							Rad Audio
 						</a>
 					</h1>
@@ -22,42 +22,97 @@
 						<ul>
 							<li><a href="index.html">Home</a></li>
 							<li><a href="about.html">About</a></li>
-							<li><a href="bands.html">Bands</a></li>
+							<!--<li><a href="bands.html">Bands</a></li>-->
 							<li><a href="upcoming_events.html">Upcoming Events</a></li>
 							<li><a href="contact.html">Contact</a></li>
 						</ul>
 					</nav>
 				</header>
 
+
+
+<!-- Events Hero (full width under nav) -->
+<header class="events-hero-wide" aria-label="Rad Audio events banner">
+  <img src="/images/hero_test3.png"
+       alt="RAD AUDIO — Live Sound · Bands · Events"
+       loading="eager"
+       decoding="async">
+</header>
+
+
 <!-- Upcoming Events -->
-<section class="gigs-section container" id="test">
-  <h3><strong>Upcoming Events</strong></h3>
-  <ul class="gig-list-stacked">
+<section class="gigs-section container upcoming-events-page" id="test">
+  <h3>Upcoming Events</h3>
 
-    <li>
-      <p class="gig-date">JULY 26 @ 7:00 PM – 10:00 PM</p>
-      <p class="gig-title">Revel in Red at Big Catz BBQ – Knoxville, IL</p>
-      <p class="gig-location">Big Catz BBQ – Knoxville, IL</p>
-      <hr class="hr"/>
-    </li>
+  <div class="events-inner">
+    <ul class="gig-list-stacked">
 
-    <li>
-      <p class="gig-date">AUGUST 2</p>
-      <p class="gig-title">Karaoke Night</p>
-      <p class="gig-location">Rookies Bar & Grill - Brimfield, IL</p>
-      <hr class="hr"/>
-    </li>
+      <!-- Event 1 -->
+      <li class="gig-item" data-start="2025-07-26T19:00:00-05:00">
+        <div class="gig-badge" aria-hidden="true">
+          <span class="month">JUL</span>
+          <span class="day">26</span>
+          <span class="time">7–10 PM</span>
+        </div>
+        <div class="gig-details">
+          <p class="gig-title">Revel in Red at Big Catz BBQ – Knoxville, IL</p>
+          <p class="gig-location">
+            <a href="https://maps.google.com/?q=Big+Catz+BBQ+Knoxville+IL" target="_blank" rel="noopener">Big Catz BBQ – Knoxville, IL</a>
+          </p>
+          <hr class="hr" />
+        </div>
+      </li>
 
-	<li>
-      <p class="gig-date">OCTOBER 11 @ 7PM</p>
-      <p class="gig-title">Josh Holland Band</p>
-      <p class="gig-location">Catalpa Grove Tavern - Toulon, IL</p>
-      <hr class="hr"/>
-    </li>
+      <!-- Event 2 -->
+      <li class="gig-item" data-start="2025-08-02T20:00:00-05:00">
+        <div class="gig-badge" aria-hidden="true">
+          <span class="month">AUG</span>
+          <span class="day">02</span>
+          <span class="time">8–11:30 PM</span>
+        </div>
+        <div class="gig-details">
+          <p class="gig-title">Karaoke Night</p>
+          <p class="gig-location">
+            <a href="https://maps.google.com/?q=Rookies+Bar+%26+Grill+Brimfield+IL" target="_blank" rel="noopener">Rookies Bar & Grill – Brimfield, IL</a>
+          </p>
+          <hr class="hr" />
+        </div>
+      </li>
 
-    <!-- Repeat for more gigs -->
+      <!-- Event 3 -->
+      <li class="gig-item" data-start="2025-10-11T19:00:00-05:00">
+        <div class="gig-badge" aria-hidden="true">
+          <span class="month">OCT</span>
+          <span class="day">11</span>
+          <span class="time">7:00 PM</span>
+        </div>
+        <div class="gig-details">
+          <p class="gig-title">Josh Holland Band</p>
+          <p class="gig-location">
+            <a href="https://maps.google.com/?q=Catalpa+Grove+Tavern+Toulon+IL" target="_blank" rel="noopener">Catalpa Grove Tavern – Toulon, IL</a>
+          </p>
+          <hr class="hr" />
+        </div>
+      </li>
 
-  </ul>
+      <!-- Event 4 -->
+      <li class="gig-item" data-start="2025-10-29T19:00:00-05:00">
+        <div class="gig-badge" aria-hidden="true">
+          <span class="month">OCT</span>
+          <span class="day">29</span>
+          <span class="time">7:00 PM</span>
+        </div>
+        <div class="gig-details">
+          <p class="gig-title">The Example Band</p>
+          <p class="gig-location">
+            <a href="https://maps.google.com/?q=nowhere" target="_blank" rel="noopener">Absolutely Nowhere – Dunlap, IL</a>
+          </p>
+          <hr class="hr" />
+        </div>
+      </li>
+
+    </ul>
+  </div>
 </section>
 
 <!-- Footer -->
@@ -84,6 +139,19 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+<script>
+  (function () {
+    const now = new Date(); // local time
+
+    document.querySelectorAll('.gig-list-stacked .gig-item[data-start]').forEach(li => {
+      const start = new Date(li.getAttribute('data-start'));
+      if (!isNaN(start) && start < now) {
+        li.classList.add('is-past');
+      }
+    });
+  })();
+</script>
 
 	</body>
 </html>
