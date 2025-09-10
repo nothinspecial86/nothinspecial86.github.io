@@ -4147,6 +4147,34 @@ body.contact-page .contact-box input[type="submit"]:hover {
   }
 }
 
+.form-success {
+  color: #2ecc71;         /* green */
+  font-weight: 700;
+}
+
+.form-error {
+  color: #e74c3c;         /* red */
+  font-weight: 700;
+}
+
+/* Optional: nicer block style */
+#form-status {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+.form-success#form-status {
+  background: rgba(46, 204, 113, 0.1);
+  border: 1px solid rgba(46, 204, 113, 0.35);
+}
+
+.form-error#form-status {
+  background: rgba(231, 76, 60, 0.1);
+  border: 1px solid rgba(231, 76, 60, 0.35);
+}
+
+
 
 /* ===== About Page base ===== */
 body.about-page {
