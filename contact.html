@@ -47,31 +47,50 @@
 							</p>
 					</header>
 
-					<section class="wrapper style4 special container medium">
-						<div class="content">
-						<form>
-							<div class="row gtr-50">
-							<div class="col-6 col-12-mobile">
-								<input type="text" name="name" placeholder="Name" />
-							</div>
-							<div class="col-6 col-12-mobile">
-								<input type="text" name="email" placeholder="Email" />
-							</div>
-							<div class="col-12">
-								<input type="text" name="subject" placeholder="Subject" />
-							</div>
-							<div class="col-12">
-								<textarea name="message" placeholder="Message" rows="7"></textarea>
-							</div>
-							<div class="col-12">
-								<ul class="buttons">
-								<li><input type="submit" class="special" value="Send Message" /></li>
-								</ul>
-							</div>
-							</div>
-						</form>
+				<section class="wrapper style4 special container medium">
+				<div class="content">
+					<form id="contact-form" action="https://formsubmit.co/ajax/a7bff71935da92432869d5735e75a3a5" method="POST">
+					<!-- Honeypot -->
+					<div class="hp-wrap" aria-hidden="true" style="position:absolute;left:-5000px;width:1px;height:1px;overflow:hidden;">
+						<label for="company">Company (leave blank)</label>
+						<input type="text" id="company" name="company" tabindex="-1" autocomplete="off" />
+					</div>
+
+					<!-- Timestamp for time-gate -->
+					<input type="hidden" name="_ts" id="form-ts" value="">
+
+					<!-- FormSubmit options (hidden, no UI changes) -->
+					<input type="hidden" name="_captcha" value="false">
+					<input type="hidden" name="_template" value="table">
+					<!-- Optional: custom subject line in the email -->
+					<input type="hidden" name="_subject" value="New message from Rad Audio contact form">
+
+					<div class="row gtr-50">
+						<div class="col-6 col-12-mobile">
+						<input type="text" name="name" placeholder="Name" required />
 						</div>
-					</section>
+						<div class="col-6 col-12-mobile">
+						<input type="email" name="email" placeholder="Email" required />
+						</div>
+						<div class="col-12">
+						<input type="text" name="subject" placeholder="Subject" />
+						</div>
+						<div class="col-12">
+						<textarea name="message" placeholder="Message" rows="7" required></textarea>
+						</div>
+						<div class="col-12">
+						<ul class="buttons">
+							<li><input id="contact-submit" type="submit" class="special" value="Send Message" /></li>
+						</ul>
+						</div>
+					</div>
+					</form>
+
+					<!-- Status message (updated by JS) -->
+					<p id="form-status" style="margin-top:15px;font-weight:bold;"></p>
+				</div>
+				</section>
+
 					</section>
 				</article>
 
@@ -100,6 +119,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/contact.js"></script>
 
 	</body>
 </html>
