@@ -1,3 +1,24 @@
+@font-face {
+  font-family: 'RalewayLight';
+  src: url('/assets/webfonts/RalewayLight.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RalewayBlack';
+  src: url('/assets/webfonts/RalewayBlack.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Arena';
+  src: url('/assets/webfonts/Arena.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @import url("fontawesome-all.min.css");
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,900");
 
@@ -3752,6 +3773,7 @@ input, select, textarea {
   font-size: .95rem;
   text-transform: uppercase;
   letter-spacing: .03em;
+  font-family: '', sans-serif !important;
 }
 
 .gig-location {
@@ -4423,6 +4445,7 @@ body.upcoming-events-page .gig-list-stacked {
   border-radius: 10px;
   background: #f7f7f7;
   text-align: center;
+  font-family: sans-serif !important;
 }
 
 .gig-badge .month {
@@ -4430,21 +4453,21 @@ body.upcoming-events-page .gig-list-stacked {
   font-size: 1rem;
   font-weight: 1000;
   letter-spacing: .08em;
-  color: #000;
+  color: #212121;
 }
 
 .gig-badge .day {
   display: block;
   font-size: 1.6rem;
   font-weight: 800;
-  color: #2d2d2d;
+  color: #212121;
   line-height: 1.2;
 }
 
 .gig-badge .time {
   display: block;
   font-size: 0.78rem;
-  color: #2d2d2d;
+  color: #212121;
   margin-top: 2px;
   font-weight: bold;
 }
@@ -4454,7 +4477,7 @@ body.upcoming-events-page .gig-title {
   margin: 0 0 .35rem 0;
   font-weight: 800;
   font-size: 1.3em;
-  color: #2d2d2d;
+  color: #212121;
 }
 
 body.upcoming-events-page .gig-date {
@@ -4609,4 +4632,19 @@ body.upcoming-events-page .gigs-section {
 }
 
 
+/* FONTS HERE */
+/* Default: paragraphs, body, general text */
+body, p, ul, ol, dl, table, blockquote, input, select, textarea {
+  font-family: 'RalewayLight', sans-serif;
+}
 
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'RalewayBlack', sans-serif;
+  font-weight: 700; /* Arena looks better bold for headings */
+}
+
+/* Buttons */
+button, .button, input[type="button"], input[type="submit"], input[type="reset"] {
+  font-family: 'RalewayBlack', sans-serif;
+}
