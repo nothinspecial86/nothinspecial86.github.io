@@ -12,22 +12,36 @@ async function loadUpcomingCalendarEvents() {
   } catch (err) {
     console.error('❌ Calendar fetch failed:', err);
     const list = document.querySelector('.gig-list-stacked');
-    if (list) list.innerHTML = `<li><p style="color:red;">Unable to load events at this time.</p></li>`;
+    if (list)
+      list.innerHTML = `<li><p style="color:red;">Unable to load events at this time.</p></li>`;
     return;
   }
 
+  // Extract each event block
   const events = ics.match(/BEGIN:VEVENT([\s\S]*?)END:VEVENT/g) || [];
 
   const parsed = events
     .map((e) => {
-      const get = (key) => e.match(new RegExp(`${key}:([^\\n\\r]*)`))?.[1]?.trim();
+      const get = (key) =>
+        e.match(new RegExp(`${key}:([^\\n\\r]*)`))?.[1]?.trim();
+
       const start = get('DTSTART');
       const end = get('DTEND');
       const summary = get('SUMMARY') || 'Untitled Event';
-      const location = get('LOCATION') || 'Location TBD';
+      const location = get('LOCATION') || ''; // Full address for map link
+
+      // Clean up description (visible link text)
+      let description = get('DESCRIPTION') || '';
+      description = description
+        .replace(/\\,/g, ',')               // unescape commas
+        .replace(/<\/?[^>]+(>|$)/g, '')     // strip HTML tags
+        .replace(/&lt;|&gt;|&amp;/g, '')    // remove HTML entities
+        .replace(/\s+/g, ' ')               // normalize spaces
+        .trim();
+
       const startDate = start ? parseIcsDate(start) : null;
       const endDate = end ? parseIcsDate(end) : null;
-      return { summary, location, startDate, endDate };
+      return { summary, location, description, startDate, endDate };
     })
     .filter((e) => e.startDate && e.startDate >= new Date())
     .sort((a, b) => a.startDate - b.startDate);
@@ -39,10 +53,25 @@ async function loadUpcomingCalendarEvents() {
   parsed.forEach((ev) => {
     const month = ev.startDate.toLocaleString('en-US', { month: 'short' });
     const day = ev.startDate.getDate();
-    const startTime = ev.startDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    const startTime = ev.startDate.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+    });
     const endTime = ev.endDate
-      ? ev.endDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
+      ? ev.endDate.toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+        })
       : 'TBD';
+
+    const mapsHref = ev.location
+      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+          ev.location
+        )}`
+      : '';
+
+    const displayLocation = ev.description || 'Location TBD';
+
     const li = document.createElement('li');
     li.className = 'gig-item';
     li.setAttribute('data-start', ev.startDate.toISOString());
@@ -50,13 +79,21 @@ async function loadUpcomingCalendarEvents() {
       <div class="gig-badge" aria-hidden="true">
         <span class="month">${month}</span>
         <span class="day">${day}</span>
-        <span class="time">${startTime.replace(' ', '')}${endTime !== 'TBD' ? '–' + endTime.replace(' ', '') : ''}</span>
+        <span class="time">${startTime.replace(
+          ' ',
+          ''
+        )}${endTime !== 'TBD' ? '–' + endTime.replace(' ', '') : ''}</span>
       </div>
       <div class="gig-details">
-        <p class="gig-title">${ev.summary} at ${ev.location}</p>
+        <p class="gig-title">${escapeHtml(ev.summary)}</p>
         <p class="gig-location">
-          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ev.location)}"
-             target="_blank" rel="noopener">${ev.location}</a>
+          ${
+            mapsHref
+              ? `<a href="${mapsHref}" target="_blank" rel="noopener">${escapeHtml(
+                  displayLocation
+                )}</a>`
+              : escapeHtml(displayLocation)
+          }
         </p>
         <hr class="hr" />
       </div>
@@ -70,10 +107,27 @@ async function loadUpcomingCalendarEvents() {
 }
 
 function parseIcsDate(icsDate) {
-  const match = icsDate.match(/(\d{4})(\d{2})(\d{2})(T(\d{2})(\d{2}))?/);
+  const match = icsDate.match(
+    /(\d{4})(\d{2})(\d{2})(T(\d{2})(\d{2})(\d{2})?(Z)?)?/
+  );
   if (!match) return null;
-  const [_, y, m, d, , h, min] = match;
-  return new Date(Date.UTC(y, m - 1, d, h || 0, min || 0));
+  const [_, y, m, d, , h, min, s, z] = match;
+  return z
+    ? new Date(Date.UTC(y, m - 1, d, h || 0, min || 0, s || 0))
+    : new Date(y, m - 1, d, h || 0, min || 0, s || 0);
+}
+
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, (c) => {
+    const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+    };
+    return map[c];
+  });
 }
 
 document.addEventListener('DOMContentLoaded', loadUpcomingCalendarEvents);
