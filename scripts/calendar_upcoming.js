@@ -19,6 +19,7 @@ async function loadUpcomingCalendarEvents() {
 
   // Extract each event block
   const events = ics.match(/BEGIN:VEVENT([\s\S]*?)END:VEVENT/g) || [];
+  const now = new Date();
 
   const parsed = events
     .map((e) => {
@@ -28,29 +29,40 @@ async function loadUpcomingCalendarEvents() {
       const start = get('DTSTART');
       const end = get('DTEND');
       const summary = get('SUMMARY') || 'Untitled Event';
-      const location = get('LOCATION') || ''; // Full address for map link
+      const location = get('LOCATION') || ''; // full address for map link
 
-      // Clean up description (visible link text)
+      // Clean up description (this becomes the visible link text)
       let description = get('DESCRIPTION') || '';
       description = description
-        .replace(/\\,/g, ',')               // unescape commas
-        .replace(/<\/?[^>]+(>|$)/g, '')     // strip HTML tags
-        .replace(/&lt;|&gt;|&amp;/g, '')    // remove HTML entities
-        .replace(/\s+/g, ' ')               // normalize spaces
+        .replace(/\\,/g, ',') // unescape commas
+        .replace(/<\/?[^>]+(>|$)/g, '') // strip HTML tags
+        .replace(/&lt;|&gt;|&amp;/g, '') // remove HTML entities
+        .replace(/\s+/g, ' ') // normalize spaces
         .trim();
 
       const startDate = start ? parseIcsDate(start) : null;
       const endDate = end ? parseIcsDate(end) : null;
+
       return { summary, location, description, startDate, endDate };
     })
-    .filter((e) => e.startDate && e.startDate >= new Date())
+    .filter((e) => e.startDate)
     .sort((a, b) => a.startDate - b.startDate);
+
+  // Split future vs past
+  const pastEvents = parsed.filter((e) => e.startDate < now);
+  const upcomingEvents = parsed.filter((e) => e.startDate >= now);
+
+  // Keep last 3 past events (most recent first)
+  const recentPast = pastEvents.slice(-3).reverse();
+
+  // Combine past (greyed out) and upcoming
+  const combined = [...recentPast, ...upcomingEvents];
 
   const list = document.querySelector('.gig-list-stacked');
   if (!list) return;
   list.innerHTML = '';
 
-  parsed.forEach((ev) => {
+  combined.forEach((ev) => {
     const month = ev.startDate.toLocaleString('en-US', { month: 'short' });
     const day = ev.startDate.getDate();
     const startTime = ev.startDate.toLocaleTimeString('en-US', {
@@ -71,10 +83,12 @@ async function loadUpcomingCalendarEvents() {
       : '';
 
     const displayLocation = ev.description || 'Location TBD';
+    const isPast = ev.startDate < now;
 
     const li = document.createElement('li');
-    li.className = 'gig-item';
+    li.className = `gig-item${isPast ? ' is-past' : ''}`;
     li.setAttribute('data-start', ev.startDate.toISOString());
+
     li.innerHTML = `
       <div class="gig-badge" aria-hidden="true">
         <span class="month">${month}</span>
@@ -98,14 +112,16 @@ async function loadUpcomingCalendarEvents() {
         <hr class="hr" />
       </div>
     `;
+
     list.appendChild(li);
   });
 
-  if (!parsed.length) {
+  if (!combined.length) {
     list.innerHTML = `<li><p>No upcoming events at this time. Check back soon!</p></li>`;
   }
 }
 
+// --- Helpers ---
 function parseIcsDate(icsDate) {
   const match = icsDate.match(
     /(\d{4})(\d{2})(\d{2})(T(\d{2})(\d{2})(\d{2})?(Z)?)?/
