@@ -27,7 +27,15 @@ async function loadIndexCalendarEvents() {
       const end = get('DTEND');
       const summary = get('SUMMARY') || 'Untitled Event';
       const location = get('LOCATION') || ''; // full address for maps
-      const description = get('DESCRIPTION') || ''; // visible text (e.g., "Catalpa Grove Tavern – Toulon, IL")
+
+      // clean description text
+      let description = get('DESCRIPTION') || '';
+      description = description
+        .replace(/\\,/g, ',')               // fix escaped commas
+        .replace(/<\/?[^>]+(>|$)/g, '')     // remove HTML tags
+        .replace(/\s+/g, ' ')               // normalize whitespace
+        .trim();
+
       const startDate = start ? parseIcsDate(start) : null;
       const endDate = end ? parseIcsDate(end) : null;
       return { summary, location, description, startDate, endDate };
@@ -84,7 +92,6 @@ async function loadIndexCalendarEvents() {
 
 // ---- helpers ----
 function parseIcsDate(ics) {
-  // 20251106T180000Z or 20251106T130000
   const m = ics.match(
     /(\d{4})(\d{2})(\d{2})(T(\d{2})(\d{2})(\d{2})?(Z)?)?/
   );
