@@ -12,8 +12,7 @@ async function loadIndexCalendarEvents() {
   } catch (e) {
     console.error('Calendar fetch failed:', e);
     const list = document.querySelector('.gig-list-stacked');
-    if (list)
-      list.innerHTML = `<li><p style="color:red;">Unable to load events right now.</p></li>`;
+    if (list) list.innerHTML = `<li><p style="color:red;">Unable to load events right now.</p></li>`;
     return;
   }
 
@@ -22,68 +21,62 @@ async function loadIndexCalendarEvents() {
 
   const parsed = events
     .map((block) => {
-      const get = (key) =>
-        block.match(new RegExp(`${key}:([^\\n\\r]*)`))?.[1]?.trim();
+      const get = (key) => block.match(new RegExp(`${key}:([^\\n\\r]*)`))?.[1]?.trim();
 
       const start = get('DTSTART');
-      const end = get('DTEND');
-      const summary = get('SUMMARY') || 'Untitled Event';
-      const location = get('LOCATION') || ''; // address for map link
+      const end   = get('DTEND');
 
-      // Clean and sanitize description (used for visible link text)
-      let description = get('DESCRIPTION') || '';
+      const summary   = get('SUMMARY')   || 'Untitled Event';
+      const location  = get('LOCATION')  || '';  // full address for Google Maps
+      let description = get('DESCRIPTION') || ''; // visible link text
+
+      // Clean description (handles \, <p>…</p>, &lt;…&gt;, extra spaces)
       description = description
-        .replace(/\\,/g, ',')               // unescape commas
-        .replace(/<\/?[^>]+(>|$)/g, '')     // strip HTML tags
-        .replace(/&lt;|&gt;|&amp;/g, '')    // remove HTML entities
-        .replace(/\s+/g, ' ')               // normalize spaces
+        .replace(/\\,/g, ',')               // unescape commas per ICS
+        .replace(/<\/?[^>]+(>|$)/g, '')     // strip any HTML tags
+        .replace(/&lt;/g, '<')              // minimal entity decode
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&')
+        .replace(/\s+/g, ' ')
         .trim();
 
       const startDate = start ? parseIcsDate(start) : null;
-      const endDate = end ? parseIcsDate(end) : null;
+      const endDate   = end   ? parseIcsDate(end)   : null;
 
       return { summary, location, description, startDate, endDate };
     })
-    .filter((ev) => ev.startDate && ev.startDate >= new Date())
+    .filter(ev => ev.startDate && ev.startDate >= new Date())
     .sort((a, b) => a.startDate - b.startDate);
 
   const list = document.querySelector('.gig-list-stacked');
   if (!list) return;
   list.innerHTML = '';
 
-  // Render top 5 upcoming events
+  // Render up to 5 upcoming events
   parsed.slice(0, 5).forEach((ev) => {
-    const monthName = ev.startDate.toLocaleString('en-US', {
-      month: 'long',
-      timeZone: 'America/Chicago',
-    });
-    const day = ev.startDate.toLocaleString('en-US', {
-      day: 'numeric',
-      timeZone: 'America/Chicago',
-    });
-    const startTime = formatTime(ev.startDate);
-    const endTime = ev.endDate ? formatTime(ev.endDate) : '';
+    // Month/day like "October 11" (no fixed timeZone, same as upcoming script behavior)
+    const monthName = ev.startDate.toLocaleString('en-US', { month: 'long' });
+    const day       = ev.startDate.getDate();
+
+    // Times: same as upcoming script (no fixed timeZone)
+    const startTime = ev.startDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    const endTime   = ev.endDate
+      ? ev.endDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
+      : '';
+
     const displayLocation = ev.description || 'Location TBD';
     const mapsHref = ev.location
-      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-          ev.location
-        )}`
+      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ev.location)}`
       : '';
 
     const li = document.createElement('li');
     li.innerHTML = `
       <h2 class="gig-title">${escapeHtml(ev.summary)}</h2>
-      <p class="gig-date">${monthName} ${day} @ ${startTime}${
-      endTime ? ' – ' + endTime : ''
-    }</p>
+      <p class="gig-date">${monthName} ${day} @ ${startTime}${endTime ? ' – ' + endTime : ''}</p>
       <p class="gig-location">
-        ${
-          mapsHref
-            ? `<a href="${mapsHref}" target="_blank" rel="noopener">${escapeHtml(
-                displayLocation
-              )}</a>`
-            : escapeHtml(displayLocation)
-        }
+        ${mapsHref
+          ? `<a href="${mapsHref}" target="_blank" rel="noopener">${escapeHtml(displayLocation)}</a>`
+          : escapeHtml(displayLocation)}
       </p>
     `;
     list.appendChild(li);
@@ -94,35 +87,22 @@ async function loadIndexCalendarEvents() {
   }
 }
 
-// ----------------- helpers -----------------
-function parseIcsDate(ics) {
-  // Parse ICS date/time and interpret directly as local time (America/Chicago)
-  const m = ics.match(
-    /(\d{4})(\d{2})(\d{2})(T(\d{2})(\d{2})(\d{2})?(Z)?)?/
-  );
-  if (!m) return null;
-  const [_, y, mo, d, , hh, mm, ss] = m;
-  // Always use local time (no UTC conversion)
-  return new Date(+y, +mo - 1, +d, +(hh || 0), +(mm || 0), +(ss || 0));
+/* ---------- helpers (time logic matches upcoming script) ---------- */
+function parseIcsDate(icsDate) {
+  // Matches YYYYMMDD or YYYYMMDDTHHMMSS(Z)
+  const match = icsDate.match(/(\d{4})(\d{2})(\d{2})(T(\d{2})(\d{2})(\d{2})?(Z)?)?/);
+  if (!match) return null;
+  const [_, y, m, d, , hh, min, s, z] = match;
+
+  // If 'Z' present, interpret as UTC; else as local — same as upcoming script
+  return z
+    ? new Date(Date.UTC(+y, +m - 1, +d, +(hh || 0), +(min || 0), +(s || 0)))
+    : new Date(+y, +m - 1, +d, +(hh || 0), +(min || 0), +(s || 0));
 }
 
-function formatTime(date) {
-  return date.toLocaleTimeString('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
-    timeZone: 'America/Chicago',
-  });
-}
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, (c) => {
-    const map = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;',
-    };
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, (c) => {
+    const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
     return map[c];
   });
 }
