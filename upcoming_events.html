@@ -143,18 +143,5 @@
 
 			<script src="scripts/calendar_upcoming.js"></script>
 
-<script>
-  (function () {
-    const now = new Date(); // local time
-
-    document.querySelectorAll('.gig-list-stacked .gig-item[data-start]').forEach(li => {
-      const start = new Date(li.getAttribute('data-start'));
-      if (!isNaN(start) && start < now) {
-        li.classList.add('is-past');
-      }
-    });
-  })();
-</script>
-
 	</body>
 </html>
