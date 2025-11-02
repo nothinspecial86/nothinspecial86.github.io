@@ -12,52 +12,66 @@ async function loadIndexCalendarEvents() {
   } catch (e) {
     console.error('Calendar fetch failed:', e);
     const list = document.querySelector('.gig-list-stacked');
-    if (list) list.innerHTML = `<li><p style="color:red;">Unable to load events right now.</p></li>`;
+    if (list)
+      list.innerHTML = `<li><p style="color:red;">Unable to load events right now.</p></li>`;
     return;
   }
 
   const events = ics.match(/BEGIN:VEVENT([\s\S]*?)END:VEVENT/g) || [];
 
   const parsed = events
-    .map(block => {
-      const get = key => block.match(new RegExp(`${key}:([^\\n\\r]*)`))?.[1]?.trim();
+    .map((block) => {
+      const get = (key) =>
+        block.match(new RegExp(`${key}:([^\\n\\r]*)`))?.[1]?.trim();
       const start = get('DTSTART');
       const end = get('DTEND');
       const summary = get('SUMMARY') || 'Untitled Event';
-      const rawLocation = get('LOCATION') || '';
-
+      const location = get('LOCATION') || ''; // full address for maps
+      const description = get('DESCRIPTION') || ''; // visible text (e.g., "Catalpa Grove Tavern – Toulon, IL")
       const startDate = start ? parseIcsDate(start) : null;
       const endDate = end ? parseIcsDate(end) : null;
-
-      return { summary, rawLocation, startDate, endDate };
+      return { summary, location, description, startDate, endDate };
     })
-    .filter(ev => ev.startDate && ev.startDate >= new Date())
+    .filter((ev) => ev.startDate && ev.startDate >= new Date())
     .sort((a, b) => a.startDate - b.startDate);
 
   const list = document.querySelector('.gig-list-stacked');
   if (!list) return;
   list.innerHTML = '';
 
-  // Show next 5
-  parsed.slice(0, 5).forEach(ev => {
-    const monthName = ev.startDate.toLocaleString('en-US', { month: 'long', timeZone: 'America/Chicago' });
-    const day = ev.startDate.toLocaleString('en-US', { day: 'numeric', timeZone: 'America/Chicago' });
+  // Render next 5 events
+  parsed.slice(0, 5).forEach((ev) => {
+    const monthName = ev.startDate.toLocaleString('en-US', {
+      month: 'long',
+      timeZone: 'America/Chicago',
+    });
+    const day = ev.startDate.toLocaleString('en-US', {
+      day: 'numeric',
+      timeZone: 'America/Chicago',
+    });
     const startTime = formatTime(ev.startDate);
     const endTime = ev.endDate ? formatTime(ev.endDate) : 'TBD';
-
-    const prettyLoc = prettifyLocation(ev.rawLocation);
-    const mapsHref = ev.rawLocation
-      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ev.rawLocation)}`
+    const displayLocation = ev.description || 'Location TBD';
+    const mapsHref = ev.location
+      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+          ev.location
+        )}`
       : '';
 
     const li = document.createElement('li');
     li.innerHTML = `
       <h2 class="gig-title">${escapeHtml(ev.summary)}</h2>
-      <p class="gig-date">${monthName} ${day} @ ${startTime}${endTime ? ' – ' + endTime : ''}</p>
+      <p class="gig-date">${monthName} ${day} @ ${startTime}${
+      endTime && endTime !== 'TBD' ? ' – ' + endTime : ''
+    }</p>
       <p class="gig-location">
-        ${mapsHref
-          ? `<a href="${mapsHref}" target="_blank" rel="noopener">${escapeHtml(prettyLoc)}</a>`
-          : 'Location TBD'}
+        ${
+          mapsHref
+            ? `<a href="${mapsHref}" target="_blank" rel="noopener">${escapeHtml(
+                displayLocation
+              )}</a>`
+            : escapeHtml(displayLocation)
+        }
       </p>
     `;
     list.appendChild(li);
@@ -70,46 +84,33 @@ async function loadIndexCalendarEvents() {
 
 // ---- helpers ----
 function parseIcsDate(ics) {
-  // 20251106T180000Z or 20251106 or 20251106T130000
-  const m = ics.match(/(\d{4})(\d{2})(\d{2})(T(\d{2})(\d{2})(\d{2})?(Z)?)?/);
+  // 20251106T180000Z or 20251106T130000
+  const m = ics.match(
+    /(\d{4})(\d{2})(\d{2})(T(\d{2})(\d{2})(\d{2})?(Z)?)?/
+  );
   if (!m) return null;
   const [_, y, mo, d, , hh, mm, ss, z] = m;
-  // Interpret as UTC if 'Z', otherwise as local-ish; we will format in America/Chicago explicitly.
   return z
     ? new Date(Date.UTC(+y, +mo - 1, +d, +(hh || 0), +(mm || 0), +(ss || 0)))
     : new Date(+y, +mo - 1, +d, +(hh || 0), +(mm || 0), +(ss || 0));
 }
 
 function formatTime(date) {
-  return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Chicago' });
-}
-
-function prettifyLocation(loc) {
-  if (!loc) return 'Location TBD';
-  // If user already typed a nice label like "Catalpa Grove Tavern - Toulon, IL", keep it.
-  if (loc.includes(' - ')) return loc.trim();
-
-  // Otherwise, try to reduce a full street address to "Venue – City, ST"
-  // Heuristic: first part before comma = venue; find City, ST near the end.
-  const parts = loc.split(',').map(s => s.trim()).filter(Boolean);
-  if (parts.length === 1) return parts[0];
-
-  const venue = parts[0];
-  // Find the last token that looks like a 2-letter state code.
-  const stateIdx = parts.findIndex(p => /^[A-Z]{2}$/.test(p));
-  if (stateIdx > 0) {
-    const city = parts[stateIdx - 1];
-    const state = parts[stateIdx];
-    return `${venue} – ${city}, ${state}`;
-  }
-
-  // Fallback: venue – last two comma parts (likely "City, ST ZIP")
-  const tail = parts.slice(-2).join(', ');
-  return `${venue} – ${tail.replace(/\b\d{5}(-\d{4})?$/, '').trim()}`;
+  return date.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    timeZone: 'America/Chicago',
+  });
 }
 
 function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+  return String(s).replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  }[c]));
 }
 
 document.addEventListener('DOMContentLoaded', loadIndexCalendarEvents);
