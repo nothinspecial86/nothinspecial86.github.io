@@ -17,27 +17,31 @@ async function loadIndexCalendarEvents() {
     return;
   }
 
+  // Extract VEVENT blocks
   const events = ics.match(/BEGIN:VEVENT([\s\S]*?)END:VEVENT/g) || [];
 
   const parsed = events
     .map((block) => {
       const get = (key) =>
         block.match(new RegExp(`${key}:([^\\n\\r]*)`))?.[1]?.trim();
+
       const start = get('DTSTART');
       const end = get('DTEND');
       const summary = get('SUMMARY') || 'Untitled Event';
-      const location = get('LOCATION') || ''; // full address for maps
+      const location = get('LOCATION') || ''; // address for map link
 
-      // clean description text
+      // Clean and sanitize description (used for visible link text)
       let description = get('DESCRIPTION') || '';
       description = description
-        .replace(/\\,/g, ',')               // fix escaped commas
-        .replace(/<\/?[^>]+(>|$)/g, '')     // remove HTML tags
-        .replace(/\s+/g, ' ')               // normalize whitespace
+        .replace(/\\,/g, ',')               // unescape commas
+        .replace(/<\/?[^>]+(>|$)/g, '')     // strip HTML tags
+        .replace(/&lt;|&gt;|&amp;/g, '')    // remove HTML entities
+        .replace(/\s+/g, ' ')               // normalize spaces
         .trim();
 
       const startDate = start ? parseIcsDate(start) : null;
       const endDate = end ? parseIcsDate(end) : null;
+
       return { summary, location, description, startDate, endDate };
     })
     .filter((ev) => ev.startDate && ev.startDate >= new Date())
@@ -47,7 +51,7 @@ async function loadIndexCalendarEvents() {
   if (!list) return;
   list.innerHTML = '';
 
-  // Render next 5 events
+  // Render top 5 upcoming events
   parsed.slice(0, 5).forEach((ev) => {
     const monthName = ev.startDate.toLocaleString('en-US', {
       month: 'long',
@@ -58,7 +62,7 @@ async function loadIndexCalendarEvents() {
       timeZone: 'America/Chicago',
     });
     const startTime = formatTime(ev.startDate);
-    const endTime = ev.endDate ? formatTime(ev.endDate) : 'TBD';
+    const endTime = ev.endDate ? formatTime(ev.endDate) : '';
     const displayLocation = ev.description || 'Location TBD';
     const mapsHref = ev.location
       ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
@@ -70,7 +74,7 @@ async function loadIndexCalendarEvents() {
     li.innerHTML = `
       <h2 class="gig-title">${escapeHtml(ev.summary)}</h2>
       <p class="gig-date">${monthName} ${day} @ ${startTime}${
-      endTime && endTime !== 'TBD' ? ' – ' + endTime : ''
+      endTime ? ' – ' + endTime : ''
     }</p>
       <p class="gig-location">
         ${
@@ -90,16 +94,16 @@ async function loadIndexCalendarEvents() {
   }
 }
 
-// ---- helpers ----
+// ----------------- helpers -----------------
 function parseIcsDate(ics) {
+  // Parse ICS date/time and interpret directly as local time (America/Chicago)
   const m = ics.match(
     /(\d{4})(\d{2})(\d{2})(T(\d{2})(\d{2})(\d{2})?(Z)?)?/
   );
   if (!m) return null;
-  const [_, y, mo, d, , hh, mm, ss, z] = m;
-  return z
-    ? new Date(Date.UTC(+y, +mo - 1, +d, +(hh || 0), +(mm || 0), +(ss || 0)))
-    : new Date(+y, +mo - 1, +d, +(hh || 0), +(mm || 0), +(ss || 0));
+  const [_, y, mo, d, , hh, mm, ss] = m;
+  // Always use local time (no UTC conversion)
+  return new Date(+y, +mo - 1, +d, +(hh || 0), +(mm || 0), +(ss || 0));
 }
 
 function formatTime(date) {
@@ -111,13 +115,16 @@ function formatTime(date) {
 }
 
 function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, (c) => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;',
-  }[c]));
+  return String(s).replace(/[&<>"']/g, (c) => {
+    const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+    };
+    return map[c];
+  });
 }
 
 document.addEventListener('DOMContentLoaded', loadIndexCalendarEvents);
