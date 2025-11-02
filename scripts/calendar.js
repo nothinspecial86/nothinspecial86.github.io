@@ -1,7 +1,7 @@
 // scripts/calendar.js
 async function loadCalendarEvents() {
   const calendarURL = 'https://calendar.google.com/calendar/ical/57d4b94486ef72a90c0e0852ff99bd9b96c352689b56a78da55512e3b9e851d8@group.calendar.google.com/public/basic.ics';
-  const response = await fetch(calendarURL);
+  const response = await fetch("https://corsproxy.io/?" + encodeURIComponent(calendarURL));
   const ics = await response.text();
 
   // Match each event block
