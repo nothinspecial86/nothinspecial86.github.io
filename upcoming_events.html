@@ -1,160 +1,146 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Rad Audio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="upcoming-events-page index is-preload">
-		<div id="page-wrapper">
+// scripts/calendar_upcoming.js
+async function loadUpcomingCalendarEvents() {
+  const calendarURL =
+    'https://calendar.google.com/calendar/ical/57d4b94486ef72a90c0e0852ff99bd9b96c352689b56a78da55512e3b9e851d8@group.calendar.google.com/public/basic.ics';
+  const proxy = 'https://api.allorigins.win/raw?url=';
 
-			<!-- Header -->
-				<header id="header">
-					<h1 id="logo">
-						<a href="index.html">
-							<img src="/images/sound_logo.gif" alt="Logo Icon" class="logo-icon" />
-							Rad Audio
-						</a>
-					</h1>
-					<nav id="nav">
-						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="about.html">About</a></li>
-							<!--<li><a href="bands.html">Bands</a></li>-->
-							<li><a href="upcoming_events.html">Upcoming Events</a></li>
-							<li><a href="contact.html">Contact</a></li>
-						</ul>
-					</nav>
-				</header>
+  let ics;
+  try {
+    const response = await fetch(proxy + encodeURIComponent(calendarURL));
+    if (!response.ok) throw new Error(`Proxy fetch failed: ${response.status}`);
+    ics = await response.text();
+  } catch (err) {
+    console.error('❌ Calendar fetch failed:', err);
+    const list = document.querySelector('.gig-list-stacked');
+    if (list)
+      list.innerHTML = `<li><p style="color:red;">Unable to load events at this time.</p></li>`;
+    return;
+  }
 
+  // Extract each VEVENT block
+  const events = ics.match(/BEGIN:VEVENT([\s\S]*?)END:VEVENT/g) || [];
 
+  const parsed = events
+    .map((e) => {
+      const get = (key) =>
+        e.match(new RegExp(`${key}:([^\\n\\r]*)`))?.[1]?.trim();
 
-<!-- Events Hero (full width under nav) -->
-<header class="events-hero-wide" aria-label="Rad Audio events banner">
-  <img src="/images/hero_test3.png"
-       alt="RAD AUDIO — Live Sound · Bands · Events"
-       loading="eager"
-       decoding="async">
-</header>
+      const start = get('DTSTART');
+      const end = get('DTEND');
+      const summary = get('SUMMARY') || 'Untitled Event';
+      const location = get('LOCATION') || ''; // Full address for map link
 
+      // Clean up description (visible link text)
+      let description = get('DESCRIPTION') || '';
+      description = description
+        .replace(/\\,/g, ',')               // unescape commas
+        .replace(/<\/?[^>]+(>|$)/g, '')     // strip HTML tags
+        .replace(/&lt;|&gt;|&amp;/g, '')    // remove HTML entities
+        .replace(/\s+/g, ' ')               // normalize spaces
+        .trim();
 
-<!-- Upcoming Events -->
-<section class="gigs-section container upcoming-events-page" id="test">
-  <h3>Upcoming Events</h3>
+      const startDate = start ? parseIcsDate(start) : null;
+      const endDate = end ? parseIcsDate(end) : null;
+      return { summary, location, description, startDate, endDate };
+    })
+    .filter((e) => e.startDate)
+    .sort((a, b) => a.startDate - b.startDate);
 
-  <div class="events-inner">
-    <ul class="gig-list-stacked">
+  const now = new Date();
 
-      
-      <li class="gig-item" data-start="2025-10-11T16:00:00-06:00">
-        <div class="gig-badge" aria-hidden="true">
-          <span class="month">Oct</span>
-          <span class="day">11</span>
-          <span class="time">4-8 PM</span>
-        </div>
-        <div class="gig-details">
-          <p class="gig-title">The Josh Holland Band at Catalpa Grove Tavern - Toulon IL</p>
-          <p class="gig-location">
-            <a href="https://www.google.com/maps/place/7935+IL-17,+Toulon,+IL+61483" target="_blank" rel="noopener">Catalpa Grove Tavern - Toulon IL</a>
-          </p>
-          <hr class="hr" />
-        </div>
-      </li>
+  // Split into future and past events
+  const upcomingEvents = parsed.filter((e) => e.startDate >= now);
+  const pastEvents = parsed.filter((e) => e.startDate < now);
 
-  
-      <li class="gig-item" data-start="2025-10-25T20:00:00-05:00">
-        <div class="gig-badge" aria-hidden="true">
-          <span class="month">Oct</span>
-          <span class="day">25</span>
-          <span class="time">TBD</span>
-        </div>
-        <div class="gig-details">
-          <p class="gig-title">Karaoke Night at JR Lounge</p>
-          <p class="gig-location">
-            <a href="https://www.google.com/maps/search/?api=1&query=JR+Lounge,+108+N+Oak+St,+Williamsfield,+IL+61489" target="_blank" rel="noopener">JR Lounge – Williamsfield, IL</a>
-          </p>
-          <hr class="hr" />
-        </div>
-      </li>
+  // Include the 3 most recent past events (descending order)
+  const recentPast = pastEvents.slice(-3).reverse(); // newest first
 
-      <li class="gig-item" data-start="2025-10-31T20:00:00-05:00">
-        <div class="gig-badge" aria-hidden="true">
-          <span class="month">Oct</span>
-          <span class="day">31</span>
-          <span class="time">TBD</span>
-        </div>
-        <div class="gig-details">
-          <p class="gig-title">Bold Choice</p>
-          <p class="gig-location">
-            <a href="" target="_blank" rel="noopener">Location TBD</a>
-          </p>
-          <hr class="hr" />
-        </div>
-      </li>
+  // Combine: past first (greyed) + upcoming
+  const combinedEvents = [...recentPast, ...upcomingEvents];
 
-<!--  
-      <li class="gig-item" data-start="2025-08-02T20:00:00-05:00">
-        <div class="gig-badge" aria-hidden="true">
-          <span class="month">AUG</span>
-          <span class="day">02</span>
-          <span class="time">8–11:30 PM</span>
-        </div>
-        <div class="gig-details">
-          <p class="gig-title">Karaoke Night</p>
-          <p class="gig-location">
-            <a href="https://maps.google.com/?q=Rookies+Bar+%26+Grill+Brimfield+IL" target="_blank" rel="noopener">Rookies Bar & Grill – Brimfield, IL</a>
-          </p>
-          <hr class="hr" />
-        </div>
-      </li>
--->
+  const list = document.querySelector('.gig-list-stacked');
+  if (!list) return;
+  list.innerHTML = '';
 
-    </ul>
-  </div>
-</section>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-<!-- Footer -->
-<footer id="footer">
-  <div class="footer-inner">
-    <ul class="icons">
-      <!--<li><a href="#" class="icon brands circle fa-twitter"><span class="label">Twitter</span></a></li>-->
-      <li><a href="https://www.facebook.com/people/RAD-Audio/61578342239406/" class="icon brands circle fa-facebook-f" target="_blank" rel="noopener"><span class="label"></span></a></li>
-      <li><a href="mailto:contact@radaudiopeoria.com" class="icon solid circle fa-envelope"><span class="label">Email</span></a></li>
-    </ul>
-    <ul class="copyright">
-      <li>&copy; RAD AUDIO</li>
-      <li><a href="#">radaudiopeoria.com</a></li>
-    </ul>
-  </div>
-</footer>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-			<script src="scripts/calendar_upcoming.js"></script>
-
-<script>
-  (function () {
-    const now = new Date(); // local time
-
-    document.querySelectorAll('.gig-list-stacked .gig-item[data-start]').forEach(li => {
-      const start = new Date(li.getAttribute('data-start'));
-      if (!isNaN(start) && start < now) {
-        li.classList.add('is-past');
-      }
+  combinedEvents.forEach((ev) => {
+    const month = ev.startDate.toLocaleString('en-US', { month: 'short' });
+    const day = ev.startDate.getDate();
+    const startTime = ev.startDate.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
     });
-  })();
-</script>
+    const endTime = ev.endDate
+      ? ev.endDate.toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+        })
+      : 'TBD';
 
-	</body>
-</html>
+    const mapsHref = ev.location
+      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+          ev.location
+        )}`
+      : '';
+
+    const displayLocation = ev.description || 'Location TBD';
+    const isPast = ev.startDate < now; // mark old events
+
+    const li = document.createElement('li');
+    li.className = `gig-item${isPast ? ' is-past' : ''}`;
+    li.setAttribute('data-start', ev.startDate.toISOString());
+    li.innerHTML = `
+      <div class="gig-badge" aria-hidden="true">
+        <span class="month">${month}</span>
+        <span class="day">${day}</span>
+        <span class="time">${startTime.replace(
+          ' ',
+          ''
+        )}${endTime !== 'TBD' ? '–' + endTime.replace(' ', '') : ''}</span>
+      </div>
+      <div class="gig-details">
+        <p class="gig-title">${escapeHtml(ev.summary)}</p>
+        <p class="gig-location">
+          ${
+            mapsHref
+              ? `<a href="${mapsHref}" target="_blank" rel="noopener">${escapeHtml(
+                  displayLocation
+                )}</a>`
+              : escapeHtml(displayLocation)
+          }
+        </p>
+        <hr class="hr" />
+      </div>
+    `;
+    list.appendChild(li);
+  });
+
+  if (!combinedEvents.length) {
+    list.innerHTML = `<li><p>No upcoming events at this time. Check back soon!</p></li>`;
+  }
+}
+
+function parseIcsDate(icsDate) {
+  const match = icsDate.match(
+    /(\d{4})(\d{2})(\d{2})(T(\d{2})(\d{2})(\d{2})?(Z)?)?/
+  );
+  if (!match) return null;
+  const [_, y, m, d, , h, min, s, z] = match;
+  return z
+    ? new Date(Date.UTC(y, m - 1, d, h || 0, min || 0, s || 0))
+    : new Date(y, m - 1, d, h || 0, min || 0, s || 0);
+}
+
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, (c) => {
+    const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+    };
+    return map[c];
+  });
+}
+
+document.addEventListener('DOMContentLoaded', loadUpcomingCalendarEvents);
