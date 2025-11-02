@@ -17,7 +17,7 @@ async function loadUpcomingCalendarEvents() {
     return;
   }
 
-  // Extract each VEVENT block
+  // Extract each event block
   const events = ics.match(/BEGIN:VEVENT([\s\S]*?)END:VEVENT/g) || [];
 
   const parsed = events
@@ -43,26 +43,14 @@ async function loadUpcomingCalendarEvents() {
       const endDate = end ? parseIcsDate(end) : null;
       return { summary, location, description, startDate, endDate };
     })
-    .filter((e) => e.startDate)
+    .filter((e) => e.startDate && e.startDate >= new Date())
     .sort((a, b) => a.startDate - b.startDate);
-
-  const now = new Date();
-
-  // Split into future and past events
-  const upcomingEvents = parsed.filter((e) => e.startDate >= now);
-  const pastEvents = parsed.filter((e) => e.startDate < now);
-
-  // Include the 3 most recent past events (descending order)
-  const recentPast = pastEvents.slice(-3).reverse(); // newest first
-
-  // Combine: past first (greyed) + upcoming
-  const combinedEvents = [...recentPast, ...upcomingEvents];
 
   const list = document.querySelector('.gig-list-stacked');
   if (!list) return;
   list.innerHTML = '';
 
-  combinedEvents.forEach((ev) => {
+  parsed.forEach((ev) => {
     const month = ev.startDate.toLocaleString('en-US', { month: 'short' });
     const day = ev.startDate.getDate();
     const startTime = ev.startDate.toLocaleTimeString('en-US', {
@@ -83,10 +71,9 @@ async function loadUpcomingCalendarEvents() {
       : '';
 
     const displayLocation = ev.description || 'Location TBD';
-    const isPast = ev.startDate < now; // mark old events
 
     const li = document.createElement('li');
-    li.className = `gig-item${isPast ? ' is-past' : ''}`;
+    li.className = 'gig-item';
     li.setAttribute('data-start', ev.startDate.toISOString());
     li.innerHTML = `
       <div class="gig-badge" aria-hidden="true">
@@ -114,7 +101,7 @@ async function loadUpcomingCalendarEvents() {
     list.appendChild(li);
   });
 
-  if (!combinedEvents.length) {
+  if (!parsed.length) {
     list.innerHTML = `<li><p>No upcoming events at this time. Check back soon!</p></li>`;
   }
 }
