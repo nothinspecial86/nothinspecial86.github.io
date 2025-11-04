@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://radaudiopeoria.com/sitemap.xml
